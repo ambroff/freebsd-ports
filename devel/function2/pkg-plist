@@ -1,0 +1,7 @@
+include/function2/function2.hpp
+share/licenses/function2-4.2.3,1/BSL
+share/licenses/function2-4.2.3,1/LICENSE
+share/licenses/function2-4.2.3,1/catalog.mk
+lib/cmake/function2/function2Config.cmake
+lib/cmake/function2/function2ConfigVersion.cmake
+lib/cmake/function2/function2Targets.cmake
