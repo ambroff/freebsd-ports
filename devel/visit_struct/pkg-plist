@@ -1,0 +1,5 @@
+include/visit_struct/visit_struct.hpp
+include/visit_struct/visit_struct_boost_fusion.hpp
+include/visit_struct/visit_struct_boost_hana.hpp
+include/visit_struct/visit_struct_intrusive.hpp
+share/cmake/Modules/Findvisit_struct.cmake
