@@ -5,10 +5,10 @@ if(NOT _visitstruct_header_path)
   endif()
 endif()
 
-add_library(visit_struct INTERFACE IMPORTED)
+add_library(visit_struct::visit_struct INTERFACE IMPORTED)
 
 set_target_properties(
-  visit_struct
+  visit_struct::visit_struct
   PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_visitstruct_header_path}"
   )
