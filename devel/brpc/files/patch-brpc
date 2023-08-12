@@ -1,0 +1,612 @@
+commit 5ed1f06a462548ca92867ebac0dfcaf19d4101f2
+Author: Kyle Ambroff-Kao <kyle@ambroffkao.com>
+Date:   Fri Aug 18 18:53:03 2023 -0700
+
+    Support FreeBSD
+
+diff --git CMakeLists.txt CMakeLists.txt
+index 5d150ea309cf..54fb31b7c5d8 100644
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -266,6 +266,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+         "-Wl,-U,_MallocExtension_ReleaseFreeMemory"
+         "-Wl,-U,_ProfilerStart"
+         "-Wl,-U,_ProfilerStop")
++elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
++    set(DYNAMIC_LIB ${DYNAMIC_LIB} execinfo)
+ endif()
+ 
+ # for *.so
+@@ -404,6 +406,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+         ${PROJECT_SOURCE_DIR}/src/butil/strings/sys_string_conversions_mac.mm
+         ${PROJECT_SOURCE_DIR}/src/butil/time/time_mac.cc
+         ${PROJECT_SOURCE_DIR}/src/butil/mac/scoped_mach_port.cc)
++elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
++    set(BUTIL_SOURCES ${BUTIL_SOURCES}
++        ${PROJECT_SOURCE_DIR}/src/butil/strings/sys_string_conversions_posix.cc
++        ${PROJECT_SOURCE_DIR}/src/butil/threading/platform_thread_freebsd.cc
++        )
+ endif()
+ 
+ file(GLOB_RECURSE BVAR_SOURCES "${PROJECT_SOURCE_DIR}/src/bvar/*.cpp")
+diff --git src/brpc/builtin/threads_service.cpp src/brpc/builtin/threads_service.cpp
+index 458c1c3b0d9e..9b03360447ee 100644
+--- src/brpc/builtin/threads_service.cpp
++++ src/brpc/builtin/threads_service.cpp
+@@ -15,6 +15,7 @@
+ // specific language governing permissions and limitations
+ // under the License.
+ 
++#include <unistd.h>
+ 
+ #include "butil/time.h"
+ #include "butil/logging.h"
+diff --git src/brpc/controller.cpp src/brpc/controller.cpp
+index 338ad66c7329..8b0a92054ec1 100644
+--- src/brpc/controller.cpp
++++ src/brpc/controller.cpp
+@@ -1477,7 +1477,7 @@ int Controller::GetSockOption(int level, int optname, void* optval, socklen_t* o
+     }
+ }
+ 
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+ typedef sig_t SignalHandler;
+ #else
+ typedef sighandler_t SignalHandler;
+diff --git src/brpc/event_dispatcher.cpp src/brpc/event_dispatcher.cpp
+index e62092860c2e..d9cfc928a15a 100644
+--- src/brpc/event_dispatcher.cpp
++++ src/brpc/event_dispatcher.cpp
+@@ -66,7 +66,7 @@ EventDispatcher& GetGlobalEventDispatcher(int fd) {
+ 
+ #if defined(OS_LINUX)
+     #include "brpc/event_dispatcher_epoll.cpp"
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+     #include "brpc/event_dispatcher_kqueue.cpp"
+ #else
+     #error Not implemented
+diff --git src/brpc/event_dispatcher_kqueue.cpp src/brpc/event_dispatcher_kqueue.cpp
+index 614cd3bca36d..c11daecadcaf 100644
+--- src/brpc/event_dispatcher_kqueue.cpp
++++ src/brpc/event_dispatcher_kqueue.cpp
+@@ -19,6 +19,7 @@
+ #include <sys/types.h>
+ #include <sys/event.h>
+ #include <sys/time.h>
++#include <unistd.h>
+ 
+ namespace brpc {
+ 
+diff --git src/brpc/socket.cpp src/brpc/socket.cpp
+index c49ca08358b8..72c7fb5b162a 100644
+--- src/brpc/socket.cpp
++++ src/brpc/socket.cpp
+@@ -50,7 +50,7 @@
+ #include "brpc/details/health_check.h"
+ #include "brpc/rdma/rdma_endpoint.h"
+ #include "brpc/rdma/rdma_helper.h"
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+ #include <sys/event.h>
+ #endif
+ 
+@@ -643,6 +643,30 @@ void Socket::EnableKeepaliveIfNeeded(int fd) {
+         }
+     }
+ 
++    if (_keepalive_options->keepalive_count > 0) {
++        if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT,
++                       &_keepalive_options->keepalive_count,
++                       sizeof(_keepalive_options->keepalive_count)) != 0) {
++            PLOG(ERROR) << "Fail to set keepcnt of fd=" << fd;
++        }
++    }
++#elif defined(OS_FREEBSD)
++    if (_keepalive_options->keepalive_idle_s > 0) {
++        if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE,
++                       &_keepalive_options->keepalive_idle_s,
++                       sizeof(_keepalive_options->keepalive_idle_s)) != 0) {
++            PLOG(ERROR) << "Fail to set keepidle of fd=" << fd;
++        }
++    }
++
++    if (_keepalive_options->keepalive_interval_s > 0) {
++        if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL,
++                       &_keepalive_options->keepalive_interval_s,
++                       sizeof(_keepalive_options->keepalive_interval_s)) != 0) {
++            PLOG(ERROR) << "Fail to set keepintvl of fd=" << fd;
++        }
++    }
++
+     if (_keepalive_options->keepalive_count > 0) {
+         if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT,
+                        &_keepalive_options->keepalive_count,
+@@ -1963,8 +1987,9 @@ int Socket::SSLHandshake(int fd, bool server_mode) {
+         case SSL_ERROR_WANT_READ:
+ #if defined(OS_LINUX)
+             if (bthread_fd_wait(fd, EPOLLIN) != 0) {
+-#elif defined(OS_MACOSX)
+-            if (bthread_fd_wait(fd, EVFILT_READ) != 0) {
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
++
++            if (bthread_fd_wait(fd, EVFILT_READ) != 0) { 
+ #endif
+                 return -1;
+             }
+@@ -1973,7 +1998,7 @@ int Socket::SSLHandshake(int fd, bool server_mode) {
+         case SSL_ERROR_WANT_WRITE:
+ #if defined(OS_LINUX)
+             if (bthread_fd_wait(fd, EPOLLOUT) != 0) {
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+             if (bthread_fd_wait(fd, EVFILT_WRITE) != 0) {
+ #endif
+                 return -1;
+@@ -2366,13 +2391,17 @@ void Socket::DebugSocket(std::ostream& os, SocketId id) {
+         if (getsockopt(fd, SOL_TCP, TCP_KEEPIDLE, &keepidle, &len) == 0) {
+             os << "\ntcp_keepalive_time=" << keepidle;
+         }
++#elif  defined(OS_FREEBSD)
++        if (getsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE, &keepidle, &len) == 0) {
++            os << "\ntcp_keepalive_time=" << keepidle;
++        }
+ #endif
+     }
+ 
+     {
+         int keepintvl = 0;
+         socklen_t len = sizeof(keepintvl);
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+         if (getsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL, &keepintvl, &len) == 0) {
+             os << "\ntcp_keepalive_intvl=" << keepintvl;
+         }
+@@ -2386,7 +2415,7 @@ void Socket::DebugSocket(std::ostream& os, SocketId id) {
+     {
+         int keepcnt = 0;
+         socklen_t len = sizeof(keepcnt);
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+         if (getsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT, &keepcnt, &len) == 0) {
+             os << "\ntcp_keepalive_probes=" << keepcnt;
+         }
+@@ -2452,6 +2481,41 @@ void Socket::DebugSocket(std::ostream& os, SocketId id) {
+            << "\n  reordering=" << ti.tcpi_reordering
+            << "\n}";
+     }
++#elif  defined(OS_FREEBSD)
++    struct tcp_info ti;
++    socklen_t len = sizeof(ti);
++    if (fd >= 0 && getsockopt(fd, IPPROTO_TCP, TCP_INFO, &ti, &len) == 0) {
++        os << "\ntcpi={\n  state=" << (uint32_t)ti.tcpi_state
++           << "\n  ca_state=" << (uint32_t)ti.__tcpi_ca_state
++           << "\n  retransmits=" << (uint32_t)ti.__tcpi_retransmits
++           << "\n  probes=" << (uint32_t)ti.__tcpi_probes
++           << "\n  backoff=" << (uint32_t)ti.__tcpi_backoff
++           << "\n  options=" << (uint32_t)ti.tcpi_options
++           << "\n  snd_wscale=" << (uint32_t)ti.tcpi_snd_wscale
++           << "\n  rcv_wscale=" << (uint32_t)ti.tcpi_rcv_wscale
++           << "\n  rto=" << ti.tcpi_rto
++           << "\n  ato=" << ti.__tcpi_ato
++           << "\n  snd_mss=" << ti.tcpi_snd_mss
++           << "\n  rcv_mss=" << ti.tcpi_rcv_mss
++           << "\n  unacked=" << ti.__tcpi_unacked
++           << "\n  sacked=" << ti.__tcpi_sacked
++           << "\n  lost=" << ti.__tcpi_lost
++           << "\n  retrans=" << ti.__tcpi_retrans
++           << "\n  fackets=" << ti.__tcpi_fackets
++           << "\n  last_data_sent=" << ti.__tcpi_last_data_sent
++           << "\n  last_ack_sent=" << ti.__tcpi_last_ack_sent
++           << "\n  last_data_recv=" << ti.tcpi_last_data_recv
++           << "\n  last_ack_recv=" << ti.__tcpi_last_ack_recv
++           << "\n  pmtu=" << ti.__tcpi_pmtu
++           << "\n  rcv_ssthresh=" << ti.__tcpi_rcv_ssthresh
++           << "\n  rtt=" << ti.tcpi_rtt  // smoothed
++           << "\n  rttvar=" << ti.tcpi_rttvar
++           << "\n  snd_ssthresh=" << ti.tcpi_snd_ssthresh
++           << "\n  snd_cwnd=" << ti.tcpi_snd_cwnd
++           << "\n  advmss=" << ti.__tcpi_advmss
++           << "\n  reordering=" << ti.__tcpi_reordering
++           << "\n}";
++    }
+ #endif
+ #if BRPC_WITH_RDMA
+     if (ptr->_rdma_state == RDMA_ON && ptr->_rdma_ep) {
+diff --git src/bthread/context.cpp src/bthread/context.cpp
+index b89d432acbea..f6e97a880e18 100644
+--- src/bthread/context.cpp
++++ src/bthread/context.cpp
+@@ -378,6 +378,51 @@ __asm (
+ 
+ #endif
+ 
++#if defined(BTHREAD_CONTEXT_PLATFORM_freebsd_x86_64) && defined(BTHREAD_CONTEXT_COMPILER_gcc)
++__asm (
++    ".text\n"
++    ".globl bthread_jump_fcontext\n"
++    ".type bthread_jump_fcontext,@function\n"
++    ".align 16\n"
++    "bthread_jump_fcontext:\n"
++    "    pushq  %rbp  \n"
++    "    pushq  %rbx  \n"
++    "    pushq  %r15  \n"
++    "    pushq  %r14  \n"
++    "    pushq  %r13  \n"
++    "    pushq  %r12  \n"
++    "    leaq  -0x8(%rsp), %rsp\n"
++    "    cmp  $0, %rcx\n"
++    "    je  1f\n"
++    "    stmxcsr  (%rsp)\n"
++    "    fnstcw   0x4(%rsp)\n"
++    "1:\n"
++    "    movq  %rsp, (%rdi)\n"
++    "    movq  %rsi, %rsp\n"
++    "    cmp  $0, %rcx\n"
++    "    je  2f\n"
++    "    ldmxcsr  (%rsp)\n"
++    "    fldcw  0x4(%rsp)\n"
++    "2:\n"
++    "    leaq  0x8(%rsp), %rsp\n"
++    "    popq  %r12  \n"
++    "    popq  %r13  \n"
++    "    popq  %r14  \n"
++    "    popq  %r15  \n"
++    "    popq  %rbx  \n"
++    "    popq  %rbp  \n"
++    "    popq  %r8\n"
++    "    movq  %rdx, %rax\n"
++    "    movq  %rdx, %rdi\n"
++    "    jmp  *%r8\n"
++    ".size bthread_jump_fcontext,.-bthread_jump_fcontext\n"
++    ".section .note.GNU-stack,\"\",%progbits\n"
++    ".previous\n"
++    );
++
++#endif
++
++
+ #if defined(BTHREAD_CONTEXT_PLATFORM_linux_x86_64) && defined(BTHREAD_CONTEXT_COMPILER_gcc)
+ __asm (
+ ".text\n"
+@@ -405,6 +450,33 @@ __asm (
+ 
+ #endif
+ 
++#if defined(BTHREAD_CONTEXT_PLATFORM_freebsd_x86_64) && defined(BTHREAD_CONTEXT_COMPILER_gcc)
++__asm (
++    ".text\n"
++    ".globl bthread_make_fcontext\n"
++    ".type bthread_make_fcontext,@function\n"
++    ".align 16\n"
++    "bthread_make_fcontext:\n"
++    "    movq  %rdi, %rax\n"
++    "    andq  $-16, %rax\n"
++    "    leaq  -0x48(%rax), %rax\n"
++    "    movq  %rdx, 0x38(%rax)\n"
++    "    stmxcsr  (%rax)\n"
++    "    fnstcw   0x4(%rax)\n"
++    "    leaq  finish(%rip), %rcx\n"
++    "    movq  %rcx, 0x40(%rax)\n"
++    "    ret \n"
++    "finish:\n"
++    "    xorq  %rdi, %rdi\n"
++    "    call  _exit@PLT\n"
++    "    hlt\n"
++    ".size bthread_make_fcontext,.-bthread_make_fcontext\n"
++    ".section .note.GNU-stack,\"\",%progbits\n"
++    ".previous\n"
++    );
++
++#endif
++
+ #if defined(BTHREAD_CONTEXT_PLATFORM_apple_x86_64) && defined(BTHREAD_CONTEXT_COMPILER_gcc)
+ __asm (
+ ".text\n"
+diff --git src/bthread/context.h src/bthread/context.h
+index ef98e458b50a..180427d0c483 100644
+--- src/bthread/context.h
++++ src/bthread/context.h
+@@ -21,7 +21,7 @@
+ #include <stdio.h>
+ #include <stddef.h>
+ 
+-#if defined(__GNUC__) || defined(__APPLE__)
++#if defined(__GNUC__) || defined(__APPLE__) || defined(__FreeBSD__)
+ 
+   #define BTHREAD_CONTEXT_COMPILER_gcc
+ 
+@@ -41,6 +41,12 @@
+ 	    #define BTHREAD_CONTEXT_CALL_CONVENTION
+ 	#endif
+ 
++  #elif defined(__FreeBSD__)
++        #ifdef __x86_64__
++            #define BTHREAD_CONTEXT_PLATFORM_freebsd_x86_64
++            #define BTHREAD_CONTEXT_CALL_CONVENTION
++        #endif
++
+   #elif defined(__MINGW32__) || defined (__MINGW64__)
+ 	#if defined(__x86_64__)
+ 	    #define BTHREAD_CONTEXT_COMPILER_gcc
+diff --git src/bthread/errno.cpp src/bthread/errno.cpp
+index 7f5e2ca08fdd..49764dc5f31f 100644
+--- src/bthread/errno.cpp
++++ src/bthread/errno.cpp
+@@ -35,7 +35,7 @@ extern int *__errno_location() __attribute__((__const__));
+ int *bthread_errno_location() {
+     return __errno_location();
+ }
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+ 
+ extern int * __error(void);
+ 
+diff --git src/bthread/fd.cpp src/bthread/fd.cpp
+index f26cbd0754aa..cc2fca6dc069 100644
+--- src/bthread/fd.cpp
++++ src/bthread/fd.cpp
+@@ -174,7 +174,7 @@ public:
+         epoll_event evt = { EPOLLOUT, { NULL } };
+         if (epoll_ctl(saved_epfd, EPOLL_CTL_ADD,
+                       closing_epoll_pipe[1], &evt) < 0) {
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+         struct kevent kqueue_event;
+         EV_SET(&kqueue_event, closing_epoll_pipe[1], EVFILT_WRITE, EV_ADD | EV_ENABLE,
+                 0, 0, NULL);
+@@ -250,7 +250,7 @@ public:
+             return -1;
+         }
+ # endif
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+         struct kevent kqueue_event;
+         EV_SET(&kqueue_event, fd, events, EV_ADD | EV_ENABLE | EV_ONESHOT,
+                 0, 0, butex);
+@@ -290,7 +290,7 @@ public:
+         }
+ #if defined(OS_LINUX)
+         epoll_ctl(_epfd, EPOLL_CTL_DEL, fd, NULL);
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+         struct kevent evt;
+         EV_SET(&evt, fd, EVFILT_WRITE, EV_DELETE, 0, 0, NULL);
+         kevent(_epfd, &evt, 1, NULL, 0, NULL);
+@@ -316,7 +316,7 @@ private:
+         const size_t MAX_EVENTS = 32;
+ #if defined(OS_LINUX)
+         epoll_event* e = new (std::nothrow) epoll_event[MAX_EVENTS];
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+         typedef struct kevent KEVENT;
+         struct kevent* e = new (std::nothrow) KEVENT[MAX_EVENTS];
+ #endif
+@@ -334,7 +334,7 @@ private:
+             const int epfd = _epfd;
+ #if defined(OS_LINUX)
+             const int n = epoll_wait(epfd, e, MAX_EVENTS, -1);
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+             const int n = kevent(epfd, NULL, 0, e, MAX_EVENTS, NULL);
+ #endif
+             if (_stop) {
+@@ -374,7 +374,7 @@ private:
+                 EpollButex* butex = pbutex ?
+                     pbutex->load(butil::memory_order_consume) : NULL;
+ # endif
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+                 EpollButex* butex = static_cast<EpollButex*>(e[i].udata);
+ #endif
+                 if (butex != NULL && butex != CLOSING_GUARD) {
+@@ -433,7 +433,7 @@ short epoll_to_poll_events(uint32_t epoll_events) {
+     CHECK_EQ((uint32_t)poll_events, epoll_events);
+     return poll_events;
+ }
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+ static short kqueue_to_poll_events(int kqueue_events) {
+     //TODO: add more values?
+     short poll_events = 0;
+@@ -464,7 +464,7 @@ int pthread_fd_wait(int fd, unsigned events,
+     }
+ #if defined(OS_LINUX)
+     const short poll_events = bthread::epoll_to_poll_events(events);
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+     const short poll_events = bthread::kqueue_to_poll_events(events);
+ #endif
+     if (poll_events == 0) {
+@@ -535,7 +535,7 @@ int bthread_connect(int sockfd, const sockaddr* serv_addr,
+     }
+ #if defined(OS_LINUX)
+     if (bthread_fd_wait(sockfd, EPOLLOUT) < 0) {
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+     if (bthread_fd_wait(sockfd, EVFILT_WRITE) < 0) {
+ #endif
+         return -1;
+diff --git src/bthread/sys_futex.cpp src/bthread/sys_futex.cpp
+index 803bec666002..f1a683329dad 100644
+--- src/bthread/sys_futex.cpp
++++ src/bthread/sys_futex.cpp
+@@ -25,7 +25,7 @@
+ #include <pthread.h>
+ #include <unordered_map>
+ 
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+ 
+ namespace bthread {
+ 
+diff --git src/bthread/sys_futex.h src/bthread/sys_futex.h
+index 786d87e097b1..26d4d95a675d 100644
+--- src/bthread/sys_futex.h
++++ src/bthread/sys_futex.h
+@@ -53,7 +53,7 @@ inline int futex_requeue_private(void* addr1, int nwake, void* addr2) {
+ 
+ }  // namespace bthread
+ 
+-#elif defined(OS_MACOSX)
++#elif defined(OS_MACOSX) || defined(OS_FREEBSD)
+ 
+ namespace bthread {
+ 
+diff --git src/bthread/task_group.cpp src/bthread/task_group.cpp
+index cbae7c5bfa99..fb29e1e333ad 100644
+--- src/bthread/task_group.cpp
++++ src/bthread/task_group.cpp
+@@ -158,7 +158,7 @@ void TaskGroup::run_main_task() {
+         }
+         if (FLAGS_show_per_worker_usage_in_vars && !usage_bvar) {
+             char name[32];
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+             snprintf(name, sizeof(name), "bthread_worker_usage_%" PRIu64,
+                      pthread_numeric_id());
+ #else
+diff --git src/butil/compat.h src/butil/compat.h
+index d75e16337f7b..5039913ddb8b 100644
+--- src/butil/compat.h
++++ src/butil/compat.h
+@@ -66,6 +66,10 @@ __END_DECLS
+ 
+ #include <sys/epoll.h>
+ 
++#elif defined(OS_FREEBSD)
++
++#include <sys/event.h>
++
+ #else
+ 
+ #error "The platform does not support epoll-like APIs"
+@@ -82,7 +86,7 @@ inline uint64_t pthread_numeric_id() {
+     }
+     return -1;
+ #else
+-    return pthread_self();
++    return reinterpret_cast<uint64_t>(pthread_self());
+ #endif
+ }
+ 
+diff --git src/butil/errno.cpp src/butil/errno.cpp
+index 9b964e114f7c..ff6a920629db 100644
+--- src/butil/errno.cpp
++++ src/butil/errno.cpp
+@@ -52,7 +52,7 @@ int DescribeCustomizedErrno(
+             return -1;
+         }
+     } else {
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+         const int rc = strerror_r(error_code, tls_error_buf, ERROR_BUFSIZE);
+         if (rc != EINVAL)
+ #else
+@@ -79,7 +79,7 @@ const char* berror(int error_code) {
+         if (s) {
+             return s;
+         }
+-#if defined(OS_MACOSX)
++#if defined(OS_MACOSX) || defined(OS_FREEBSD)
+         const int rc = strerror_r(error_code, butil::tls_error_buf, butil::ERROR_BUFSIZE);
+         if (rc == 0 || rc == ERANGE/*bufsize is not long enough*/) {
+             return butil::tls_error_buf;
+diff --git src/butil/popen.cpp src/butil/popen.cpp
+index 506a0d1bd8d2..3ec6392f22e5 100644
+--- src/butil/popen.cpp
++++ src/butil/popen.cpp
+@@ -21,12 +21,13 @@
+ #include "butil/build_config.h"
+ #include "butil/logging.h"
+ 
++#include <sys/wait.h>
++
+ #if defined(OS_LINUX)
+ // clone is a linux specific syscall
+ #include <sched.h>
+ #include <errno.h>
+ #include <sys/types.h>
+-#include <sys/wait.h>
+ 
+ extern "C" {
+ int BAIDU_WEAK bthread_usleep(uint64_t microseconds);
+diff --git src/butil/process_util.cc src/butil/process_util.cc
+index fcb41b912e10..1c90651142d4 100644
+--- src/butil/process_util.cc
++++ src/butil/process_util.cc
+@@ -44,6 +44,17 @@ ssize_t ReadCommandLine(char* buf, size_t len, bool with_args) {
+         LOG(ERROR) << "Fail to read /proc/self/cmdline";
+         return -1;
+     }
++#elif defined(OS_FREEBSD)
++    butil::fd_guard fd(open("/proc/curproc/cmdline", O_RDONLY));
++    if (fd < 0) {
++        LOG(ERROR) << "Fail to open /proc/curproc/cmdline";
++        return -1;
++    }
++    ssize_t nr = read(fd, buf, len);
++    if (nr <= 0) {
++        LOG(ERROR) << "Fail to read /proc/curproc/cmdline";
++        return -1;
++    }
+ #elif defined(OS_MACOSX)
+     static pid_t pid = getpid();
+     std::ostringstream oss;
+diff --git src/butil/threading/platform_thread_freebsd.cc src/butil/threading/platform_thread_freebsd.cc
+index 40e15d1e2f9e..db23bb3a2edc 100644
+--- src/butil/threading/platform_thread_freebsd.cc
++++ src/butil/threading/platform_thread_freebsd.cc
+@@ -13,7 +13,6 @@
+ #include "butil/safe_strerror_posix.h"
+ #include "butil/threading/thread_id_name_manager.h"
+ #include "butil/threading/thread_restrictions.h"
+-#include "butil/tracked_objects.h"
+ 
+ #if !defined(OS_NACL)
+ #include <sys/resource.h>
+@@ -46,7 +45,6 @@ int ThreadNiceValue(ThreadPriority priority) {
+ // static
+ void PlatformThread::SetName(const char* name) {
+   ThreadIdNameManager::GetInstance()->SetName(CurrentId(), name);
+-  tracked_objects::ThreadData::InitializeThreadContext(name);
+ 
+ #if !defined(OS_NACL)
+   // On FreeBSD we can get the thread names to show up in the debugger by
+diff --git tools/parallel_http/parallel_http.cpp tools/parallel_http/parallel_http.cpp
+index 6b863e0b63fa..de9a5120e7bd 100644
+--- tools/parallel_http/parallel_http.cpp
++++ tools/parallel_http/parallel_http.cpp
+@@ -18,6 +18,7 @@
+ 
+ // Access many http servers in parallel, much faster than curl (even called in batch)
+ 
++#include <unistd.h>
+ #include <gflags/gflags.h>
+ #include <deque>
+ #include <bthread/bthread.h>
+diff --git tools/rpc_press/rpc_press.cpp tools/rpc_press/rpc_press.cpp
+index 997a9fb03c21..4fd4fc989e66 100644
+--- tools/rpc_press/rpc_press.cpp
++++ tools/rpc_press/rpc_press.cpp
+@@ -15,6 +15,7 @@
+ // specific language governing permissions and limitations
+ // under the License.
+ 
++#include <unistd.h>
+ #include <gflags/gflags.h>
+ #include <google/protobuf/dynamic_message.h>
+ #include <google/protobuf/compiler/importer.h>
+diff --git tools/trackme_server/trackme_server.cpp tools/trackme_server/trackme_server.cpp
+index 541f544a98de..d6e900d1132e 100644
+--- tools/trackme_server/trackme_server.cpp
++++ tools/trackme_server/trackme_server.cpp
+@@ -18,6 +18,7 @@
+ 
+ // A server to receive TrackMeRequest and send back TrackMeResponse.
+ 
++#include <unistd.h>
+ #include <gflags/gflags.h>
+ #include <memory>
+ #include <butil/logging.h>
