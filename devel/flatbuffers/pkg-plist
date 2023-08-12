@@ -34,10 +34,13 @@ include/flatbuffers/verifier.h
 lib/cmake/flatbuffers/BuildFlatBuffers.cmake
 lib/cmake/flatbuffers/FlatBuffersSharedTargets-%%CMAKE_BUILD_TYPE%%.cmake
 lib/cmake/flatbuffers/FlatBuffersSharedTargets.cmake
+lib/cmake/flatbuffers/FlatBuffersTargets-release.cmake
+lib/cmake/flatbuffers/FlatBuffersTargets.cmake
 lib/cmake/flatbuffers/FlatcTargets-%%CMAKE_BUILD_TYPE%%.cmake
 lib/cmake/flatbuffers/FlatcTargets.cmake
 lib/cmake/flatbuffers/flatbuffers-config-version.cmake
 lib/cmake/flatbuffers/flatbuffers-config.cmake
+lib/libflatbuffers.a
 lib/libflatbuffers.so
 lib/libflatbuffers.so.23.5.26
 libdata/pkgconfig/flatbuffers.pc
