@@ -1,0 +1,35 @@
+diff --git CMakeLists.txt CMakeLists.txt
+index 9b94815b036a..4974d9bc5d45 100644
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -9,6 +9,7 @@ INCLUDE(CPack)
+ #option(EXAMPLE_LINK_SO "Whether examples are linked dynamically" OFF)
+ option(BRPC_WITH_GLOG "With glog" OFF)
+ option(WITH_DEBUG_SYMBOLS "With debug symbols" ON)
++option(BUILD_BRAFT_TOOLS "Build tools" ON)
+ 
+ set(WITH_GLOG_VAL "0")
+ if(BRPC_WITH_GLOG)
+@@ -139,6 +140,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+         "-Wl,-U,_ProfilerStart"
+         "-Wl,-U,_ProfilerStop"
+         )
++elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
++    set(DYNAMIC_LIB ${DYNAMIC_LIB}
++        execinfo
++        )
+ else()
+     set(DYNAMIC_LIB ${DYNAMIC_LIB}
+         rt
+@@ -227,7 +232,10 @@ add_subdirectory(src)
+ if(BUILD_UNIT_TESTS)
+     add_subdirectory(test)
+ endif()
+-add_subdirectory(tools)
++
++if (BUILD_BRAFT_TOOLS)
++    add_subdirectory(tools)
++endif()
+ 
+ file(COPY ${CMAKE_CURRENT_BINARY_DIR}/braft/
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/output/include/braft/
