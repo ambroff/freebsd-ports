@@ -13,11 +13,19 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	protoc:devel/protobuf \
 		leveldb>0:databases/leveldb
 
-USES=		cmake:testing compiler:c++14-lang cpe
+USES=		cmake:testing compiler:c++14-lang cpe pathfix
 CPE_VENDOR=	apache
 USE_LDCONFIG=	yes
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	apache
+
+CMAKE_OFF=	BUILD_BRPC_TOOLS BUILD_UNIT_TESTS
+
+post-stage:
+	${MKDIR} ${STAGEDIR}${PREFIX}/share/cmake/Modules
+	${INSTALL_DATA} \
+		Findbrpc.cmake \
+		${STAGEDIR}${PREFIX}/share/cmake/Modules/Findbrpc.cmake
 
 .include <bsd.port.mk>
