@@ -1,0 +1,6 @@
+An industrial-grade C++ implementation of RAFT consensus algorithm and
+replicated state machine based on brpc. braft is designed and
+implemented for scenarios demanding for high workload and low overhead
+of latency, with the consideration for easy-to-understand concepts so
+that engineers inside Baidu can build their own distributed systems
+individually and correctly.
