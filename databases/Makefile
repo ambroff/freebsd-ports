@@ -199,7 +199,7 @@
     SUBDIR += mydumper
     SUBDIR += mysql++
     SUBDIR += mysql-connector-c++
-    SUBDIR += mysql-connector-java
+    SUBDIR += mysql-connector-j
     SUBDIR += mysql-connector-java51
     SUBDIR += mysql-connector-odbc-80
     SUBDIR += mysql-udf
@@ -672,6 +672,7 @@
     SUBDIR += postgresql-rum
     SUBDIR += postgresql-semver
     SUBDIR += postgresql-tds_fdw
+    SUBDIR += postgresql-wal2json
     SUBDIR += postgresql-zhparser
     SUBDIR += postgresql11-client
     SUBDIR += postgresql11-contrib
@@ -817,6 +818,7 @@
     SUBDIR += py-redis
     SUBDIR += py-redis2
     SUBDIR += py-redis3
+    SUBDIR += py-redis4
     SUBDIR += py-rrdtool
     SUBDIR += py-sispy
     SUBDIR += py-south
@@ -1060,7 +1062,6 @@
     SUBDIR += usql
     SUBDIR += vfront
     SUBDIR += virtualpg
-    SUBDIR += virtuoso
     SUBDIR += vsqlite
     SUBDIR += webdis
     SUBDIR += wfb2sql

@@ -1531,7 +1531,6 @@
     SUBDIR += lua-cjson
     SUBDIR += lua-cqueues
     SUBDIR += lua-gettext
-    SUBDIR += lua-language-server
     SUBDIR += lua-lgi
     SUBDIR += lua-libevent
     SUBDIR += lua-lpeg
@@ -2123,6 +2122,7 @@
     SUBDIR += p5-Data-DumpXML
     SUBDIR += p5-Data-Dumper
     SUBDIR += p5-Data-Dumper-Concise
+    SUBDIR += p5-Data-Dumper-Interp
     SUBDIR += p5-Data-Dumper-Perltidy
     SUBDIR += p5-Data-Dumper-Simple
     SUBDIR += p5-Data-Flow
@@ -4186,6 +4186,7 @@
     SUBDIR += py-Jinja2
     SUBDIR += py-Jinja2-doc
     SUBDIR += py-Js2Py
+    SUBDIR += py-Levenshtein
     SUBDIR += py-PYB11Generator
     SUBDIR += py-PeachPy
     SUBDIR += py-Products.ExternalEditor
@@ -4214,6 +4215,7 @@
     SUBDIR += py-aiorwlock
     SUBDIR += py-aiosignal
     SUBDIR += py-airtable-python-wrapper
+    SUBDIR += py-all-repos
     SUBDIR += py-amalgamate
     SUBDIR += py-aniso8601
     SUBDIR += py-aniso86016
@@ -4440,6 +4442,7 @@
     SUBDIR += py-cfgv
     SUBDIR += py-cfn-lint
     SUBDIR += py-cftime
+    SUBDIR += py-chai
     SUBDIR += py-chainmap
     SUBDIR += py-characteristic
     SUBDIR += py-check-jsonschema
@@ -4500,6 +4503,7 @@
     SUBDIR += py-constantly
     SUBDIR += py-construct
     SUBDIR += py-construct-classes
+    SUBDIR += py-contextlib-chdir
     SUBDIR += py-contextlib2
     SUBDIR += py-convertdate
     SUBDIR += py-cookiecutter
@@ -4651,7 +4655,6 @@
     SUBDIR += py-findlibs
     SUBDIR += py-findpython
     SUBDIR += py-first
-    SUBDIR += py-five.globalrequest
     SUBDIR += py-fixtures
     SUBDIR += py-flake8
     SUBDIR += py-flake8-black
@@ -4733,7 +4736,6 @@
     SUBDIR += py-google-pasta
     SUBDIR += py-google-re2
     SUBDIR += py-googleapis-common-protos
-    SUBDIR += py-gpep517
     SUBDIR += py-gpxpy
     SUBDIR += py-grab
     SUBDIR += py-graphene
@@ -4827,7 +4829,6 @@
     SUBDIR += py-itertree
     SUBDIR += py-itypes
     SUBDIR += py-janus
-    SUBDIR += py-jaraco
     SUBDIR += py-jaraco.classes
     SUBDIR += py-jaraco.collections
     SUBDIR += py-jaraco.context
@@ -5278,6 +5279,7 @@
     SUBDIR += py-pyintelowl
     SUBDIR += py-pyjq
     SUBDIR += py-pyjsparser
+    SUBDIR += py-pykdtree
     SUBDIR += py-pylama
     SUBDIR += py-pylev
     SUBDIR += py-pylibsrtp
@@ -5345,7 +5347,6 @@
     SUBDIR += py-pytest-flakes
     SUBDIR += py-pytest-flask
     SUBDIR += py-pytest-forked
-    SUBDIR += py-pytest-freezegun
     SUBDIR += py-pytest-freezer
     SUBDIR += py-pytest-helpers-namespace
     SUBDIR += py-pytest-html
@@ -5397,7 +5398,6 @@
     SUBDIR += py-pytest4-cache
     SUBDIR += py-pytest4-cov
     SUBDIR += py-pytest4-flakes
-    SUBDIR += py-Levenshtein
     SUBDIR += py-python-application
     SUBDIR += py-python-bugzilla
     SUBDIR += py-python-dbusmock
@@ -5459,13 +5459,13 @@
     SUBDIR += py-qt6-sip
     SUBDIR += py-qtbuilder
     SUBDIR += py-qtconsole
+    SUBDIR += py-querystring-parser
     SUBDIR += py-questionary
     SUBDIR += py-qutip
     SUBDIR += py-qutip-qip
     SUBDIR += py-ramlfications
     SUBDIR += py-rapidfuzz
     SUBDIR += py-rapidfuzz-capi
-    SUBDIR += py-rapidfuzz2
     SUBDIR += py-ratelim
     SUBDIR += py-ratelimiter
     SUBDIR += py-rauth
@@ -5479,6 +5479,7 @@
     SUBDIR += py-rednose
     SUBDIR += py-reedsolo
     SUBDIR += py-referencing
+    SUBDIR += py-regress
     SUBDIR += py-remote-pdb
     SUBDIR += py-repoze.lru
     SUBDIR += py-repoze.sphinx.autointerface
@@ -5833,50 +5834,19 @@
     SUBDIR += py-yg.lockfile
     SUBDIR += py-ypy-websocket
     SUBDIR += py-yunomi
-    SUBDIR += py-z3c.autoinclude
-    SUBDIR += py-z3c.batching
-    SUBDIR += py-z3c.zcmlhook
     SUBDIR += py-zarr
-    SUBDIR += py-zc.buildout
     SUBDIR += py-zclockfile
     SUBDIR += py-zconfig
     SUBDIR += py-zfp
     SUBDIR += py-zict
     SUBDIR += py-zipp
-    SUBDIR += py-zope.app.basicskin
-    SUBDIR += py-zope.app.renderer
-    SUBDIR += py-zope.app.schema
-    SUBDIR += py-zope.broken
-    SUBDIR += py-zope.browser
-    SUBDIR += py-zope.browserresource
-    SUBDIR += py-zope.cachedescriptors
     SUBDIR += py-zope.component
     SUBDIR += py-zope.configuration
-    SUBDIR += py-zope.contentprovider
-    SUBDIR += py-zope.contenttype
-    SUBDIR += py-zope.copy
-    SUBDIR += py-zope.datetime
-    SUBDIR += py-zope.deferredimport
     SUBDIR += py-zope.deprecation
-    SUBDIR += py-zope.dottedname
     SUBDIR += py-zope.event
-    SUBDIR += py-zope.exceptions
-    SUBDIR += py-zope.filerepresentation
-    SUBDIR += py-zope.generations
-    SUBDIR += py-zope.globalrequest
-    SUBDIR += py-zope.i18n
     SUBDIR += py-zope.interface
-    SUBDIR += py-zope.lifecycleevent
-    SUBDIR += py-zope.location
-    SUBDIR += py-zope.processlifetime
-    SUBDIR += py-zope.publisher
     SUBDIR += py-zope.schema
-    SUBDIR += py-zope.sequencesort
-    SUBDIR += py-zope.size
-    SUBDIR += py-zope.tales
     SUBDIR += py-zope.testbrowser
-    SUBDIR += py-zope.testing
-    SUBDIR += py-zope.traversing
     SUBDIR += py3c
     SUBDIR += pybind11
     SUBDIR += pybind11-json
@@ -7149,6 +7119,7 @@
     SUBDIR += rubygem-powerpack
     SUBDIR += rubygem-pp
     SUBDIR += rubygem-pqueue
+    SUBDIR += rubygem-prettier_print
     SUBDIR += rubygem-prettyprint
     SUBDIR += rubygem-profile
     SUBDIR += rubygem-progressbar
@@ -7266,6 +7237,7 @@
     SUBDIR += rubygem-ruby-filemagic
     SUBDIR += rubygem-ruby-fogbugz
     SUBDIR += rubygem-ruby-libvirt
+    SUBDIR += rubygem-ruby-lsp
     SUBDIR += rubygem-ruby-macho
     SUBDIR += rubygem-ruby-magic
     SUBDIR += rubygem-ruby-ole
@@ -7275,6 +7247,7 @@
     SUBDIR += rubygem-ruby2_keywords
     SUBDIR += rubygem-ruby2ruby
     SUBDIR += rubygem-ruby_dep
+    SUBDIR += rubygem-ruby_memcheck
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygems-mirror
     SUBDIR += rubygem-rubygems-tasks
@@ -7344,6 +7317,7 @@
     SUBDIR += rubygem-snowplow-tracker
     SUBDIR += rubygem-soap4r
     SUBDIR += rubygem-solve
+    SUBDIR += rubygem-sorbet-runtime
     SUBDIR += rubygem-sorted_set
     SUBDIR += rubygem-spring
     SUBDIR += rubygem-spring-watcher-listen
@@ -7393,6 +7367,7 @@
     SUBDIR += rubygem-swagger-blocks
     SUBDIR += rubygem-sync
     SUBDIR += rubygem-syntax_suggest
+    SUBDIR += rubygem-syntax_tree
     SUBDIR += rubygem-sysinfo
     SUBDIR += rubygem-syslog
     SUBDIR += rubygem-systemu
@@ -7793,6 +7768,7 @@
     SUBDIR += xbyak
     SUBDIR += xc3sprog
     SUBDIR += xcscope.el
+    SUBDIR += xdg-dbus-proxy
     SUBDIR += xdg-user-dirs
     SUBDIR += xdg-utils
     SUBDIR += xdgpaths

@@ -1,16 +1,18 @@
 PORTNAME=	rubocop
-PORTVERSION=	1.55.1
+PORTVERSION=	1.56.1
 CATEGORIES=	devel ruby
 MASTER_SITES=	RG
 
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Ruby code style checking tool
-WWW=		https://rubocop.org/
+WWW=		https://rubocop.org/ \
+		https://github.com/rubocop/rubocop
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-RUN_DEPENDS=	rubygem-json>=2.3<3:devel/rubygem-json \
+RUN_DEPENDS=	rubygem-base64>=0.1.1<0.2:converters/rubygem-base64 \
+		rubygem-json>=2.3<3:devel/rubygem-json \
 		rubygem-language_server-protocol>=3.17.0:devel/rubygem-language_server-protocol \
 		rubygem-parallel>=1.10<2:sysutils/rubygem-parallel \
 		rubygem-parser>=3.2.2.3:devel/rubygem-parser \

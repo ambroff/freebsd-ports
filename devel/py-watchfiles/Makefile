@@ -1,10 +1,9 @@
 PORTNAME=	watchfiles
-PORTVERSION=	0.19.0
-PORTREVISION=	3
+PORTVERSION=	0.20.0
 CATEGORIES=	devel python
 MASTER_SITES=	PYPI
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
-DISTFILES=	watchfiles-${PORTVERSION}${EXTRACT_SUFX}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Simple, modern and high performance file watching and code reload in python

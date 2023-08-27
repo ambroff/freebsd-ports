@@ -668,6 +668,7 @@
     SUBDIR += p5-Number-Format-Metric
     SUBDIR += p5-Number-Spell
     SUBDIR += p5-ODF-lpOD
+    SUBDIR += p5-ODF-lpOD-Helper
     SUBDIR += p5-OpenOffice-OODoc
     SUBDIR += p5-PDF-API2
     SUBDIR += p5-PDF-API2-Simple
@@ -1593,6 +1594,7 @@
     SUBDIR += py-texttable
     SUBDIR += py-textual
     SUBDIR += py-three-merge
+    SUBDIR += py-tiktoken
     SUBDIR += py-tinycss
     SUBDIR += py-tinycss2
     SUBDIR += py-toml
@@ -1633,8 +1635,6 @@
     SUBDIR += py-yapf
     SUBDIR += py-youseedee
     SUBDIR += py-zope.i18nmessageid
-    SUBDIR += py-zope.structuredtext
-    SUBDIR += py-zope.tal
     SUBDIR += py-zpt
     SUBDIR += qprint
     SUBDIR += qr
@@ -1900,6 +1900,7 @@
     SUBDIR += rubygem-ya2yaml
     SUBDIR += rubygem-yard
     SUBDIR += rubygem-yard-chef
+    SUBDIR += rubygem-yarp
     SUBDIR += rubygem-zmq
     SUBDIR += rw-aspell
     SUBDIR += rxp
