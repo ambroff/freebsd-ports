@@ -1,5 +1,5 @@
 PORTNAME=	chromium
-PORTVERSION=	116.0.5845.140
+PORTVERSION=	119.0.6045.105
 CATEGORIES=	www wayland
 MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/ \
 		https://nerd.hu/distfiles/:external
@@ -102,6 +102,7 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		enable_nacl=false \
 		enable_remoting=false \
 		enable_rust=false \
+		enable_widevine=true \
 		fatal_linker_warnings=false \
 		icu_use_data_file=false \
 		is_clang=true \
@@ -137,7 +138,7 @@ GN_ARGS+=	google_api_key="AIzaSyBsp9n41JLW8jCokwn7vhoaMejDFRd1mp8"
 SUB_FILES=	chromium-browser.desktop chrome
 SUB_LIST+=	COMMENT="${COMMENT}"
 
-OPTIONS_DEFINE=		CODECS CUPS DEBUG DRIVER KERBEROS LTO PIPEWIRE TEST
+OPTIONS_DEFINE=		CODECS CUPS DEBUG DRIVER KERBEROS LTO PIPEWIRE TEST WIDEVINE
 OPTIONS_DEFAULT=	CODECS CUPS DRIVER KERBEROS PIPEWIRE SNDIO
 OPTIONS_EXCLUDE_aarch64=LTO
 OPTIONS_GROUP=		AUDIO
@@ -212,6 +213,9 @@ SNDIO_LIB_DEPENDS=	libsndio.so:audio/sndio
 SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
+WIDEVINE_DESC=		Depend on foreign-cdm to enable playback of DRM content
+WIDEVINE_RUN_DEPENDS=	foreign-cdm>0:www/foreign-cdm
+
 .include "Makefile.tests"
 TEST_DISTFILES=		${PORTNAME}-${DISTVERSION}-testdata${EXTRACT_SUFX} \
 			test_fonts-336e775eec536b2d785cc80eff6ac39051931286.tar.gz:external
@@ -253,7 +257,7 @@ PLIST_SUB+=	NOT_AARCH64=""
 FFMPEG_TARGET=	ia32
 .endif
 
-FFMPEG_BDIR=	${WRKSRC}/third_party/ffmpeg/build.${FFMPEG_TARGET}.freebsd/${FFMPEG_BRAND}
+FFMPEG_BDIR=	${WRKSRC}/build.${FFMPEG_TARGET}.freebsd/${FFMPEG_BRAND}
 FFMPEG_CDIR=	${WRKSRC}/third_party/ffmpeg/chromium/config/${FFMPEG_BRAND}/freebsd/${FFMPEG_TARGET}
 
 # Allow relocations against read-only segments (override lld default)

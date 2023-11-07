@@ -1,5 +1,5 @@
 PORTNAME=	asterisk
-PORTVERSION=	18.19.0
+PORTVERSION=	18.20.0
 CATEGORIES=	net
 MASTER_SITES=	https://downloads.asterisk.org/pub/telephony/%SUBDIR%/:DEFAULT,g729
 MASTER_SITE_SUBDIR=	asterisk/ \
@@ -220,9 +220,6 @@ PJSIP_VERSION=	2.13.1
 
 .if ${OPSYS} == FreeBSD && ( ${OSVERSION} >= 1400079 || ( ${OSVERSION} >= 1302505 && ${OSVERSION} < 1400000 ))
 USES+=		llvm:max=14
-CPP=            clang-cpp${LLVM_VERSION}
-CC=             clang${LLVM_VERSION}
-CXX=            clang++${LLVM_VERSION}
 .endif
 
 .include <bsd.port.pre.mk>

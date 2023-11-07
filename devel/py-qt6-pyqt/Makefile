@@ -21,10 +21,10 @@ USE_GL+=	gl opengl
 USE_LOCALE=	C.UTF-8
 USE_PYTHON=	concurrent flavors
 USE_PYQT=	qtbuilder sip pysip
-USE_QT=		5compat base declarative imageformats languageserver lottie \
-		multimedia positioning quick3d remoteobjects sensors \
-		serialport speech shadertools svg tools translations \
-		webchannel websockets
+USE_QT=		5compat base connectivity declarative imageformats \
+		languageserver lottie multimedia positioning quick3d \
+		remoteobjects sensors serialport speech shadertools \
+		svg tools translations webchannel websockets
 
 PORTSCOUT?=	limit:^${_QT_VERSION:R}
 

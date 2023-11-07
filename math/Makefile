@@ -103,6 +103,7 @@
     SUBDIR += R-cran-mitools
     SUBDIR += R-cran-moments
     SUBDIR += R-cran-mvtnorm
+    SUBDIR += R-cran-ncdf4
     SUBDIR += R-cran-nloptr
     SUBDIR += R-cran-nnls
     SUBDIR += R-cran-nortest
@@ -267,13 +268,14 @@
     SUBDIR += curv
     SUBDIR += cvc5
     SUBDIR += dbcsr
+    SUBDIR += ddfun
     SUBDIR += deal.ii
     SUBDIR += dgl
     SUBDIR += dieharder
     SUBDIR += dihydrogen
     SUBDIR += dionysus
     SUBDIR += disco
-    SUBDIR += djbfft
+    SUBDIR += dqfun
     SUBDIR += drgeo
     SUBDIR += dsdp
     SUBDIR += dune-alugrid
@@ -329,6 +331,7 @@
     SUBDIR += fftw3-quad
     SUBDIR += flann
     SUBDIR += flexfloat
+    SUBDIR += flexiblas
     SUBDIR += flint2
     SUBDIR += flintqs
     SUBDIR += flopc++
@@ -945,6 +948,7 @@
     SUBDIR += py-gym-notices
     SUBDIR += py-hdbscan
     SUBDIR += py-hdmedians
+    SUBDIR += py-hepstats
     SUBDIR += py-heyoka
     SUBDIR += py-igraph
     SUBDIR += py-iminuit
@@ -972,7 +976,6 @@
     SUBDIR += py-matplotlib
     SUBDIR += py-matplotlib-inline
     SUBDIR += py-matplotlib-scalebar
-    SUBDIR += py-matplotlib2
     SUBDIR += py-minorminer
     SUBDIR += py-mip
     SUBDIR += py-mixsimulator
@@ -1092,6 +1095,7 @@
     SUBDIR += qrupdate
     SUBDIR += qtiplot-doc
     SUBDIR += qwtplot3d
+    SUBDIR += qxfun
     SUBDIR += randlib
     SUBDIR += rankwidth
     SUBDIR += rapid

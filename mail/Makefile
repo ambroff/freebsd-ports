@@ -33,6 +33,7 @@
     SUBDIR += bogofilter-bdb
     SUBDIR += bogofilter-kc
     SUBDIR += bogofilter-sqlite
+    SUBDIR += bsd-vacation
     SUBDIR += bsfilter
     SUBDIR += bsmtp
     SUBDIR += bulk_mailer
@@ -77,8 +78,6 @@
     SUBDIR += couriergraph
     SUBDIR += crm114
     SUBDIR += cvsmail
-    SUBDIR += cyrus-imapd23
-    SUBDIR += cyrus-imapd24
     SUBDIR += cyrus-imapd25
     SUBDIR += cyrus-imapd30
     SUBDIR += cyrus-imapd32
@@ -500,6 +499,7 @@
     SUBDIR += py-alot
     SUBDIR += py-authheaders
     SUBDIR += py-authres
+    SUBDIR += py-checkdmarc
     SUBDIR += py-django-mailbox
     SUBDIR += py-django-mailman3
     SUBDIR += py-dkimpy
@@ -555,7 +555,6 @@
     SUBDIR += qpopper
     SUBDIR += qsf
     SUBDIR += qsheff
-    SUBDIR += qtools
     SUBDIR += queue-fix
     SUBDIR += queue-repair
     SUBDIR += rainloop
@@ -588,6 +587,7 @@
     SUBDIR += rubygem-actionmailbox60
     SUBDIR += rubygem-actionmailbox61
     SUBDIR += rubygem-actionmailbox70
+    SUBDIR += rubygem-actionmailbox71
     SUBDIR += rubygem-actionmailer4
     SUBDIR += rubygem-actionmailer5
     SUBDIR += rubygem-actionmailer50
@@ -595,6 +595,7 @@
     SUBDIR += rubygem-actionmailer60
     SUBDIR += rubygem-actionmailer61
     SUBDIR += rubygem-actionmailer70
+    SUBDIR += rubygem-actionmailer71
     SUBDIR += rubygem-email_reply_parser
     SUBDIR += rubygem-email_reply_parser-discourse
     SUBDIR += rubygem-email_reply_trimmer
@@ -616,6 +617,7 @@
     SUBDIR += rubygem-premailer-rails-rails60
     SUBDIR += rubygem-premailer-rails-rails61
     SUBDIR += rubygem-premailer-rails-rails70
+    SUBDIR += rubygem-premailer-rails110-rails70
     SUBDIR += rubygem-rmail
     SUBDIR += rubygem-roadie
     SUBDIR += rubygem-roadie-rails-rails4
@@ -639,7 +641,6 @@
     SUBDIR += sieve-connect
     SUBDIR += sigrot
     SUBDIR += simscan
-    SUBDIR += slapd-cyrus
     SUBDIR += slimta
     SUBDIR += sma
     SUBDIR += smfsav

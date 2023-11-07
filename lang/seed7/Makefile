@@ -1,5 +1,5 @@
 PORTNAME=	seed7
-DISTVERSION=	05_20230709
+DISTVERSION=	05_20230913
 PORTREVISION=	0
 CATEGORIES=	lang
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${DISTNAME}/
@@ -7,7 +7,7 @@ DISTNAME=	${PORTNAME}_${DISTVERSION}
 
 MAINTAINER=	gahr@FreeBSD.org
 COMMENT=	High-level, extensible programming language
-WWW=		http://seed7.sourceforge.net/
+WWW=		https://seed7.sourceforge.net/
 
 # The interpreter and the example programs use the GPL license, while the
 # runtime library uses the LGPL license.

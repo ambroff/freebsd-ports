@@ -28,6 +28,7 @@
     SUBDIR += abstreet
     SUBDIR += abuse_sdl
     SUBDIR += ace-of-penguins
+    SUBDIR += adom
     SUBDIR += adonthell
     SUBDIR += adonthell-wastesedge
     SUBDIR += aestats
@@ -627,7 +628,6 @@
     SUBDIR += minetest
     SUBDIR += minetest_game
     SUBDIR += minetestmapper
-    SUBDIR += minilens
     SUBDIR += mirrormagic
     SUBDIR += miscom
     SUBDIR += mkhexgrid
@@ -636,6 +636,7 @@
     SUBDIR += moon-buggy
     SUBDIR += moonlander
     SUBDIR += moonlight-embedded
+    SUBDIR += moonlight-qt
     SUBDIR += moria
     SUBDIR += motogt
     SUBDIR += mrboom
@@ -811,6 +812,7 @@
     SUBDIR += qstat
     SUBDIR += quadra
     SUBDIR += quadrapassel
+    SUBDIR += quackle
     SUBDIR += quake-data
     SUBDIR += quake-dpmod
     SUBDIR += quake-source
@@ -952,7 +954,6 @@
     SUBDIR += taisei
     SUBDIR += tali
     SUBDIR += tanglet
-    SUBDIR += tanks-of-freedom
     SUBDIR += tbclock
     SUBDIR += tecnoballz
     SUBDIR += teeworlds
@@ -965,6 +966,7 @@
     SUBDIR += textmaze
     SUBDIR += thegrind
     SUBDIR += tileworld
+    SUBDIR += tinycols
     SUBDIR += tkmoo
     SUBDIR += tmatrix
     SUBDIR += tomatoes
@@ -1037,7 +1039,6 @@
     SUBDIR += wargus
     SUBDIR += warmux
     SUBDIR += warzone2100
-    SUBDIR += weebsay
     SUBDIR += wesnoth
     SUBDIR += whichwayisup
     SUBDIR += widelands

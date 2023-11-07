@@ -143,6 +143,7 @@
     SUBDIR += djvulibre
     SUBDIR += dmtx-utils
     SUBDIR += drawing
+    SUBDIR += drawio
     SUBDIR += drawpile
     SUBDIR += drm-510-kmod
     SUBDIR += drm-515-kmod
@@ -613,6 +614,7 @@
     SUBDIR += opencv
     SUBDIR += opendx
     SUBDIR += openexr
+    SUBDIR += openexr-website-docs
     SUBDIR += openfx-arena
     SUBDIR += openfx-misc
     SUBDIR += opengl-man
@@ -826,7 +828,6 @@
     SUBDIR += poppler-utils
     SUBDIR += potrace
     SUBDIR += povray-meta
-    SUBDIR += povray36
     SUBDIR += povray37
     SUBDIR += povray38
     SUBDIR += ppmcaption
@@ -889,10 +890,12 @@
     SUBDIR += py-h3
     SUBDIR += py-haishoku
     SUBDIR += py-hiplot
+    SUBDIR += py-hsluv
     SUBDIR += py-imageio
     SUBDIR += py-imageio-ffmpeg
     SUBDIR += py-imagesize
     SUBDIR += py-img2pdf
+    SUBDIR += py-imutils
     SUBDIR += py-leather
     SUBDIR += py-lerc
     SUBDIR += py-mapclassify
@@ -916,6 +919,7 @@
     SUBDIR += py-photocollage
     SUBDIR += py-piexif
     SUBDIR += py-pillow
+    SUBDIR += py-pillow-heif
     SUBDIR += py-pivy
     SUBDIR += py-plotly
     SUBDIR += py-png
@@ -1136,7 +1140,6 @@
     SUBDIR += tgif
     SUBDIR += tif22pnm
     SUBDIR += tiff
-    SUBDIR += tiffgt
     SUBDIR += tifmerge
     SUBDIR += tikzit
     SUBDIR += tiled

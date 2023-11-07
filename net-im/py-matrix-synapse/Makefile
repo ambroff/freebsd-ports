@@ -1,5 +1,5 @@
 PORTNAME=	matrix-synapse
-DISTVERSION=	1.87.0
+DISTVERSION=	1.93.0
 CATEGORIES=	net-im python
 MASTER_SITES=	PYPI
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -52,8 +52,8 @@ TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}virtualenv>=15.0:devel/py-virtualenv@${PY_F
 		${PYTHON_PKGNAMEPREFIX}authlib>=0.15.1:security/py-authlib@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}idna>=2.5:dns/py-idna@${PY_FLAVOR}
 
-USES=		python pycryptography:run cargo
-USE_PYTHON=	autoplist distutils
+USES=		cargo python
+USE_PYTHON=	autoplist cryptography distutils
 USE_RC_SUBR=	synapse
 WRKSRC=		${WRKDIR}/${PORTNAME:S/-/_/}-${DISTVERSION}
 CARGO_CONFIGURE=	yes

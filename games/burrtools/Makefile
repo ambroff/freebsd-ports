@@ -1,12 +1,12 @@
 PORTNAME=	burrtools
 PORTVERSION=	0.6.3
-PORTREVISION=	23
+PORTREVISION=	24
 CATEGORIES=	games
 MASTER_SITES=	SF
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Puzzle solver
-WWW=		http://burrtools.sourceforge.net/
+WWW=		https://burrtools.sourceforge.net/
 
 LICENSE=	GPLv2+ # COPYING is GPLv3
 

@@ -1,5 +1,5 @@
 PORTNAME=	aws-sdk-resources
-PORTVERSION=	3.169.0
+PORTVERSION=	3.173.0
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
@@ -45,6 +45,8 @@ RUN_DEPENDS=	rubygem-aws-sdk-accessanalyzer>=1<2:devel/rubygem-aws-sdk-accessana
 		rubygem-aws-sdk-backupgateway>=1<2:devel/rubygem-aws-sdk-backupgateway \
 		rubygem-aws-sdk-backupstorage>=1<2:devel/rubygem-aws-sdk-backupstorage \
 		rubygem-aws-sdk-batch>=1<2:devel/rubygem-aws-sdk-batch \
+		rubygem-aws-sdk-bedrock>=1<2:devel/rubygem-aws-sdk-bedrock \
+		rubygem-aws-sdk-bedrockruntime>=1<2:devel/rubygem-aws-sdk-bedrockruntime \
 		rubygem-aws-sdk-billingconductor>=1<2:devel/rubygem-aws-sdk-billingconductor \
 		rubygem-aws-sdk-braket>=1<2:devel/rubygem-aws-sdk-braket \
 		rubygem-aws-sdk-budgets>=1<2:devel/rubygem-aws-sdk-budgets \
@@ -104,6 +106,7 @@ RUN_DEPENDS=	rubygem-aws-sdk-accessanalyzer>=1<2:devel/rubygem-aws-sdk-accessana
 		rubygem-aws-sdk-dataexchange>=1<2:devel/rubygem-aws-sdk-dataexchange \
 		rubygem-aws-sdk-datapipeline>=1<2:devel/rubygem-aws-sdk-datapipeline \
 		rubygem-aws-sdk-datasync>=1<2:devel/rubygem-aws-sdk-datasync \
+		rubygem-aws-sdk-datazone>=1<2:devel/rubygem-aws-sdk-datazone \
 		rubygem-aws-sdk-dax>=1<2:devel/rubygem-aws-sdk-dax \
 		rubygem-aws-sdk-detective>=1<2:devel/rubygem-aws-sdk-detective \
 		rubygem-aws-sdk-devicefarm>=1<2:devel/rubygem-aws-sdk-devicefarm \
@@ -146,7 +149,6 @@ RUN_DEPENDS=	rubygem-aws-sdk-accessanalyzer>=1<2:devel/rubygem-aws-sdk-accessana
 		rubygem-aws-sdk-frauddetector>=1<2:devel/rubygem-aws-sdk-frauddetector \
 		rubygem-aws-sdk-fsx>=1<2:devel/rubygem-aws-sdk-fsx \
 		rubygem-aws-sdk-gamelift>=1<2:devel/rubygem-aws-sdk-gamelift \
-		rubygem-aws-sdk-gamesparks>=1<2:devel/rubygem-aws-sdk-gamesparks \
 		rubygem-aws-sdk-glacier>=1<2:devel/rubygem-aws-sdk-glacier \
 		rubygem-aws-sdk-globalaccelerator>=1<2:devel/rubygem-aws-sdk-globalaccelerator \
 		rubygem-aws-sdk-glue>=1<2:devel/rubygem-aws-sdk-glue \
@@ -247,6 +249,7 @@ RUN_DEPENDS=	rubygem-aws-sdk-accessanalyzer>=1<2:devel/rubygem-aws-sdk-accessana
 		rubygem-aws-sdk-mturk>=1<2:devel/rubygem-aws-sdk-mturk \
 		rubygem-aws-sdk-mwaa>=1<2:devel/rubygem-aws-sdk-mwaa \
 		rubygem-aws-sdk-neptune>=1<2:devel/rubygem-aws-sdk-neptune \
+		rubygem-aws-sdk-neptunedata>=1<2:devel/rubygem-aws-sdk-neptunedata \
 		rubygem-aws-sdk-networkfirewall>=1<2:devel/rubygem-aws-sdk-networkfirewall \
 		rubygem-aws-sdk-networkmanager>=1<2:devel/rubygem-aws-sdk-networkmanager \
 		rubygem-aws-sdk-nimblestudio>=1<2:devel/rubygem-aws-sdk-nimblestudio \
@@ -262,6 +265,7 @@ RUN_DEPENDS=	rubygem-aws-sdk-accessanalyzer>=1<2:devel/rubygem-aws-sdk-accessana
 		rubygem-aws-sdk-panorama>=1<2:devel/rubygem-aws-sdk-panorama \
 		rubygem-aws-sdk-paymentcryptography>=1<2:devel/rubygem-aws-sdk-paymentcryptography \
 		rubygem-aws-sdk-paymentcryptographydata>=1<2:devel/rubygem-aws-sdk-paymentcryptographydata \
+		rubygem-aws-sdk-pcaconnectorad>=1<2:devel/rubygem-aws-sdk-pcaconnectorad \
 		rubygem-aws-sdk-personalize>=1<2:devel/rubygem-aws-sdk-personalize \
 		rubygem-aws-sdk-personalizeevents>=1<2:devel/rubygem-aws-sdk-personalizeevents \
 		rubygem-aws-sdk-personalizeruntime>=1<2:devel/rubygem-aws-sdk-personalizeruntime \

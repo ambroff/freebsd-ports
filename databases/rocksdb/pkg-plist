@@ -119,5 +119,6 @@ lib/cmake/rocksdb/modules/ReadVersion.cmake
 lib/librocksdb.a
 lib/librocksdb.so
 lib/librocksdb.so.%%PORTVERSION%%
-lib/librocksdb.so.8
+lib/librocksdb_test.so
+lib/librocksdb_tools.so
 libdata/pkgconfig/rocksdb.pc

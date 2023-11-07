@@ -112,7 +112,6 @@
     SUBDIR += py-gdstk
     SUBDIR += py-gmsh
     SUBDIR += py-lcapy
-    SUBDIR += py-ocp
     SUBDIR += py-phidl
     SUBDIR += py-pyfda
     SUBDIR += py-pygmsh
@@ -154,6 +153,7 @@
     SUBDIR += xcircuit
     SUBDIR += xyce
     SUBDIR += yosys
+    SUBDIR += yosys-ghdl-plugin
     SUBDIR += yosys-systemverilog
     SUBDIR += z88
     SUBDIR += zcad

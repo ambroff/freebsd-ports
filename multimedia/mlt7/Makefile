@@ -1,17 +1,14 @@
 PORTNAME=		${_MLT_PORTNAME}
 DISTVERSION=		${_MLT_VERSION}
-PORTREVISION?=		1
+PORTREVISION?=		2
 CATEGORIES?=		multimedia
-# Don't use GitHub "fake" downloads that are auto-generated from a
-# tag; the project uploads tarballs for each release.
-#               https://github.com/mltframework/mlt/releases/download/v6.26.1/mlt-6.26.1.tar.gz
 MASTER_SITES=		https://github.com/mltframework/mlt/releases/download/v${DISTVERSION}/
 DISTFILES=		mlt-${DISTVERSION}${EXTRACT_SUFX}
 WRKSRC=			${WRKDIR}/mlt-${DISTVERSION}
 
 MAINTAINER=		kde@FreeBSD.org
 COMMENT?=		Multimedia framework for TV broadcasting
-WWW=		https://www.mltframework.org/
+WWW=			https://www.mltframework.org/
 
 LICENSE?=		GPLv2 GPLv3 LGPL21
 LICENSE_COMB?=		multi
@@ -138,7 +135,8 @@ VIDSTAB_LIB_DEPENDS=	libvidstab.so:multimedia/vid.stab
 VIDSTAB_CMAKE_BOOL=	MOD_VIDSTAB
 
 VORBIS_DESC=		Enable Vorbis module
-VORBIS_LIB_DEPENDS=	libvorbis.so:audio/libvorbis libogg.so:audio/libogg
+VORBIS_LIB_DEPENDS=	libvorbis.so:audio/libvorbis \
+			libogg.so:audio/libogg
 VORBIS_CMAKE_BOOL=	MOD_VORBIS
 
 XINE_DESC=		Enable xine module
@@ -146,9 +144,6 @@ XINE_CMAKE_BOOL=	MOD_XINE
 
 pre-configure:
 	${RM} ${STAGEDIR}${PREFIX}/man/man1/melt.1
-	@${REINPLACE_CMD} -e 's,/usr/local,${LOCALBASE},' \
-		${WRKSRC}/src/modules/frei0r/factory.c \
-		${WRKSRC}/src/modules/jackrack/plugin_mgr.c
 
 common-post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/melt-7

@@ -66,6 +66,7 @@
     SUBDIR += ca_root_nss
     SUBDIR += caesarcipher
     SUBDIR += caldera
+    SUBDIR += caldera-ot
     SUBDIR += calife
     SUBDIR += cardpeek
     SUBDIR += cargo-audit
@@ -123,7 +124,9 @@
     SUBDIR += cyrus-sasl2-saslauthd
     SUBDIR += cyrus-sasl2-sql
     SUBDIR += cyrus-sasl2-srp
+    SUBDIR += cyrus-sasl2-xoauth2
     SUBDIR += d0_blind_id
+    SUBDIR += debian-keyring
     SUBDIR += dehydrated
     SUBDIR += denyhosts
     SUBDIR += destroy
@@ -166,7 +169,6 @@
     SUBDIR += ftimes
     SUBDIR += fuzz
     SUBDIR += fwanalog
-    SUBDIR += fwbuilder
     SUBDIR += fwknop
     SUBDIR += fwlogwatch
     SUBDIR += gcr
@@ -192,6 +194,7 @@
     SUBDIR += gonepass
     SUBDIR += gopass
     SUBDIR += gorilla
+    SUBDIR += gosec
     SUBDIR += gost-engine
     SUBDIR += gostsum
     SUBDIR += gpa
@@ -270,7 +273,6 @@
     SUBDIR += krb5-119
     SUBDIR += krb5-120
     SUBDIR += krb5-121
-    SUBDIR += krb5-appl
     SUBDIR += krb5-devel
     SUBDIR += kstart
     SUBDIR += ktls_isa-l_crypto-kmod
@@ -421,8 +423,10 @@
     SUBDIR += openssl-agent
     SUBDIR += openssl-quictls
     SUBDIR += openssl-unsafe
-    SUBDIR += openssl30
+    SUBDIR += openssl111
     SUBDIR += openssl31
+    SUBDIR += openssl31-quictls
+    SUBDIR += openssl32
     SUBDIR += openvas
     SUBDIR += openvpn
     SUBDIR += openvpn-admin
@@ -827,6 +831,7 @@
     SUBDIR += plasma5-kwallet-pam
     SUBDIR += please
     SUBDIR += poly1305aes
+    SUBDIR += portacl-rc
     SUBDIR += proftpd-mod_clamav
     SUBDIR += proxycheck
     SUBDIR += proxytunnel
@@ -918,6 +923,7 @@
     SUBDIR += py-google-auth-oauthlib
     SUBDIR += py-gpgme
     SUBDIR += py-gpsoauth
+    SUBDIR += py-greenbone-feed-sync
     SUBDIR += py-gssapi
     SUBDIR += py-gvm-tools
     SUBDIR += py-hkdf
@@ -940,6 +946,7 @@
     SUBDIR += py-keyrings.alt
     SUBDIR += py-krb5
     SUBDIR += py-libnacl
+    SUBDIR += py-liboqs-python
     SUBDIR += py-m2crypto
     SUBDIR += py-maec
     SUBDIR += py-merkletools
@@ -1076,6 +1083,7 @@
     SUBDIR += rubygem-airbrussh
     SUBDIR += rubygem-android_key_attestation
     SUBDIR += rubygem-attr_encrypted
+    SUBDIR += rubygem-attr_encrypted3
     SUBDIR += rubygem-bcrypt
     SUBDIR += rubygem-bcrypt-ruby
     SUBDIR += rubygem-bcrypt_pbkdf
@@ -1086,6 +1094,8 @@
     SUBDIR += rubygem-devise-two-factor-rails5
     SUBDIR += rubygem-devise-two-factor-rails61
     SUBDIR += rubygem-devise-two-factor-rails70
+    SUBDIR += rubygem-devise-two-factor40-rails70
+    SUBDIR += rubygem-devise-two-factor41-rails70
     SUBDIR += rubygem-devise_pam_authenticatable2
     SUBDIR += rubygem-devise_pam_authenticatable2-rails61
     SUBDIR += rubygem-digest
@@ -1095,6 +1105,7 @@
     SUBDIR += rubygem-doorkeeper-rails5
     SUBDIR += rubygem-doorkeeper-rails50
     SUBDIR += rubygem-doorkeeper-rails61
+    SUBDIR += rubygem-doorkeeper-rails70
     SUBDIR += rubygem-duo_api
     SUBDIR += rubygem-ed25519
     SUBDIR += rubygem-encryptor
@@ -1186,6 +1197,7 @@
     SUBDIR += rubygem-ruby-hmac
     SUBDIR += rubygem-ruby-rc4
     SUBDIR += rubygem-ruby-saml
+    SUBDIR += rubygem-ruby-saml115
     SUBDIR += rubygem-safety_net_attestation
     SUBDIR += rubygem-scrypt
     SUBDIR += rubygem-securecompare
@@ -1316,6 +1328,7 @@
     SUBDIR += trezord
     SUBDIR += tripwire
     SUBDIR += trousers
+    SUBDIR += trufflehog
     SUBDIR += tthsum
     SUBDIR += u2f-devd
     SUBDIR += uacme

@@ -1,7 +1,5 @@
-.include <bsd.port.pre.mk>
-
 PORTNAME=	libpfctl
-PORTVERSION=	0.3
+PORTVERSION=	0.6
 CATEGORIES=	net
 MASTER_SITES=	LOCAL/kp/
 
@@ -15,7 +13,7 @@ USE_LDCONFIG=	yes
 
 WRKSRC=		${WRKDIR}/libpfctl
 
-_LIBPFCTL_HASH=	b3a714652ff0
+_LIBPFCTL_HASH=	87c503235310
 
 PLIST_FILES=	\
 		lib/libpfctl.so \

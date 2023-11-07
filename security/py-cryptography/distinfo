@@ -1,6 +1,6 @@
-TIMESTAMP = 1693303063
-SHA256 (cryptography-41.0.3.tar.gz) = 6d192741113ef5e30d89dcb5b956ef4e1578f304708701b8b73d38e3e1461f34
-SIZE (cryptography-41.0.3.tar.gz) = 630139
+TIMESTAMP = 1698341075
+SHA256 (cryptography-41.0.5.tar.gz) = 392cb88b597247177172e02da6b7a63deeff1937fa6fec3bbf902ebd75d97ec7
+SIZE (cryptography-41.0.5.tar.gz) = 630537
 SHA256 (rust/crates/Inflector-0.11.4.crate) = fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3
 SIZE (rust/crates/Inflector-0.11.4.crate) = 17438
 SHA256 (rust/crates/aliasable-0.1.3.crate) = 250f629c0161ad8107cf89319e990051fae62832fd343083bea452d93e2205fd

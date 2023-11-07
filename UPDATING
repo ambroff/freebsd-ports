@@ -5,6 +5,334 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20231104:
+  AFFECTS: users of security/libressl
+  AUTHOR: brnrd@FreeBSD.org
+
+  The port has been updated to the latest stable version 3.8 of LibreSSL.
+  The shared library versions of the libraries have been bumped.
+
+  After upgrading, manually update all packages that depend on any of the
+  libraries provided by LibreSSL (libssl, libcrypto and libtls) since the
+  versions of these libraries have changed. Normally, you can obtain the
+  list of dependent software by running the following command:
+
+  # pkg info -r libressl
+
+  Then you should rebuild all ports depending on libressl to avoid dangling
+  shared library dependencies.
+
+20231031:
+  AFFECTS: users of devel/subversion-lts
+  AUTHOR: michaelo@FreeBSD.org
+
+  devel/subversion-lts has been updated from 1.10.x to the latest LTS version,
+  1.14.x. Some changes between these releases may require attention from
+  administrators or users.
+  Refer to https://subversion.apache.org/docs/release-notes/1.14.html#compat-misc for details.
+
+20231028:
+  AFFECTS: users of net-mgmt/nfdump
+
+  nfdump-1.7.x is compatible to nfdump-1.6.18, which means it can
+  read files created with nfdump-1.6.18 or newer. Flow files created
+  with earlier nfdump versions may not contain all flow elements.
+  If you have older files, it is recommended to use nfdump-1.6.17
+  to update the records.
+
+  nfdump 1.7.x provides the same set of programs as 1.6.x and can
+  be used almost as a drop-in replacement. This may change in future
+  and older legacy programs may be removed. You can convert any old
+  files from nfdump-1.6 to nfdump-1.7 format by reading/writing
+  files: ./nfdump -r old-flowfile -y -w new-flowfile
+
+  Please note, that only nfdump may read older flow files. All other
+  programs relay on the new file format.
+
+20231027:
+  AFFECTS: users of net-mgmt/librenms
+  AUTHOR: dvl@FreeBSD.org
+
+  When updating to >= 23.10.0, a broken crontab is fixed. This breakage
+  caused the validation error: Scheduler is not running
+  After updating, If that error does not clear for you, run:
+
+    sudo lnms config:cache
+
+20231027:
+  AFFECTS: users of print/ghostscript9*
+  AUTHOR: michaelo@FreeBSD.org
+
+  The default ghostscript version has been updated from 9 to 10.
+
+  If you compile your own ports you may keep 9 as the default version by
+  adding the following lines to your /etc/make.conf file:
+
+  #
+  # Keep ghostscript 9 as default version
+  #
+  DEFAULT_VERSIONS+=ghostscript=9
+
+  Please note that print/ghostcript9* will be removed in the future since it is
+  not supported by upstream anymore.
+
+20231026:
+  AFFECTS: users of lang/chicken
+  AUTHOR: gahr@FreeBSD.org
+
+  The chicken binaries csc and csi, together with their manual pages, have been
+  renamed to chicken-csc and chicken-csi, to avoid conflicts with lang/mono.
+  This is in line with what several Linux distros do. See PR 274736.
+
+20231023:
+  AFFECTS: users of mail/mailman3
+  AUTHOR: einar@isnic.is
+
+  logging.http section has now been split into two parts, logging.http is for
+  the Mailman internal code and logging.gunicorn is for Gunicorn specifically
+  since they have different logging formats. This should fix suprious errors
+  with KeyError: t that was often confusing for users.
+
+  Python 3.9 is now the minimum supported version of Python.
+
+20231017:
+  AFFECTS: users of lang/perl5*
+  AUTHOR: delphij@FreeBSD.org
+
+  The default Perl version has been switched to Perl 5.36.  If you are using
+  binary packages to upgrade your system, you do not have anything to do, pkg
+  upgrade will do the right thing.  For the other people, follow the
+  instructions in entry 20181213, it should still be the same.
+
+20231014:
+  AFFECTS: users of security/openssl and security/openssl30
+  AUTHOR: brnrd@FreeBSD.org
+
+  The openssl port was renamed to openssl111 and subsequently the
+  openssl30 port was renamed to openssl.
+
+  The shared library version of OpenSSL has been bumped.
+
+  Users of DEFAULT_VERSIONS= ssl=openssl30 must update this to
+  ssl=openssl.
+  Users of DEFAULT_VERSIONS= ssl=openssl should not change this unless
+  they use ports that require the deprecated OpenSSL 1.1.1 version.
+
+  You must rebuild all ports that depend on OpenSSL if you use OpenSSL
+  from ports.
+
+20231011:
+  AFFECTS: users of www/caddy
+  AUTHOR:  adamw@FreeBSD.org
+
+  The default admin endpoint has changed from localhost:2019 to
+  /var/run/caddy/caddy.sock. Using a Unix socket is more secure,
+  allowing it to be secured by filesystem permissions rather than
+  requiring a firewall.
+
+  If you only control caddy from the rc(8) script (service caddy ...),
+  you don't need to do anything. If you access the API yourself, you
+  will want to update your scripts to use the new socket.
+
+  To use the old endpoint, add the following to /etc/rc.conf:
+
+    caddy_admin="localhost:2019"
+
+20231009:
+  AFFECTS: users of net/ntpd-rs
+  AUTHOR: mikael@freebsd.org
+
+  In 1.0.0 the configuration has been completely reworked, please check the
+  documentation for details. Configuration will not automatically migrate.
+
+20231004:
+  AFFECTS: www/gitlab-ce
+  AUTHOR:  mfechner@FreeBSD.org
+
+  Before you upgrade to version 16.4.x or higher, make sure you did the
+  upgrade to 16.3.x!
+
+  The database migration for 16.4.1 can fail due to unexpected name of a foreign key.
+  So it is recommended to have a database backup available in case the solution
+  described in the update manual does not work for you.
+
+  The upgrade manual can be found as usual here:
+  https://gitlab.fechner.net/mfechner/Gitlab-docu/-/blob/master/update/16.3-16.4-freebsd.md
+
+
+20230930:
+  AFFECTS: users of Transmission (net-p2p/transmission@*)
+  AUTHOR:  mondo.debater_0q@icloud.com
+
+  Fixes Bug 274065 by reorganizing the port as a metaport
+  (net-p2p/transmission) and components port (net-p2p/transmission-components).
+  Each component may be installed through the flavors of
+  transmission-componenents (@cli, @daemon, @docs, @gtk, @qt, @utils).
+  Alternatively, one or more component may be installed by running make config
+  on the metaport net-p2p/transmission.
+
+  AFFECTS: users of devel/php-composer2
+  AUTHOR: madpilot@FreeBSD.org
+
+  The composer2 ports has been moved over the old devel/php-composer
+  port, which was still providing the old EOLed version 1 of the
+  software.
+
+  Please use `pkg install php81-composer` (substitute 81 with the
+  PHP version you're using) to properly upgrade.
+
+20230924:
+  AFFECTS: users of XFCE desktop (x11-wm/xfce4)
+  AUTHOR: madpilot@FreeBSD.org
+
+  XFCE 4.18 is incompatible with the latest version of the adwaita
+  icon theme (version 42.0 and newer), which was used as the default one.
+  Due to this the default icon theme has been changed to
+  x11-themes/xfce-icons-elementary.
+
+  Users that have XFCE already installed and are using the adwaita
+  icon theme will notice missing icons. To fix this you can install
+  any other icon theme (like x11-themes/xfce-icons-elementary) and
+  configure XFCE to use that via the "appearance" settings application,
+  under the "icons" tab.
+
+20230919:
+  AFFECTS: users of net-p2p/transmission
+  AUTHOR:  mondo.debater_0q@icloud.com
+
+  The 4.0 port haphazardly consolidated prior slave ports into flavors of a single port.
+  The flavors have now been revised to better match releases prior to 4.0.
+  The -full flavor included in the 4.0 port has been replaced with -default, which
+  restores the compile-time options of prior release's metaport. Other flavors allow
+  for more piecemeal installs. The prior -web slave port can be installed through the
+  -default flavor or the -daemon flavor.
+
+  See Bug 273841 for more details.
+
+20230915:
+  AFFECTS: users of print/ghostscript10
+  AUTHOR: michael.osipov@siemens.com
+
+  The port flavors have been replaced with a default port option of X11.
+  The flavors approach creates conflicting dependencies with other ports which
+  cannot be solved this time with the ports framework.
+
+  See PRs 270989 and 272541 for details.
+
+20230910:
+  AFFECTS: users of dns/powerdns
+  AUTHOR: tremere@cainites.net
+
+  In Authoritative Server 4.8, the LMDB backend gains a new Lightning
+  Stream-compatible schema, which requires a data migration (this is
+  automatic, and there is no migration back to the old schema). LMDB
+  backend users should pay extra attention to the Upgrade Notes
+  (https://doc.powerdns.com/authoritative/upgrading.html).
+
+20230910:
+  AFFECTS: users of net-mgmt/netbox
+  AUTHOR: kai@FreeBSD.org
+
+  1. Please make sure that the PostgreSQL server for the NetBox instance is
+     running version 12 or higher.  This is because Django 4.2 requires
+     PostgreSQL 12 as a minimum.
+
+  2. Please also check the pkg-message and the changelogs for further info.
+
+20230908:
+  AFFECTS: users of databases/postgresql* and other software using PostgreSQL to run
+  AUTHOR: kbowling@FreeBSD.org
+
+  The default version of PostgreSQL has been switched from 13 to 15.
+  The upgrade procedure can use up twice the space the databases
+  currently needs. If you have a big amount of stored data take a
+  closer look at the manpage of pg_upgrade for avoidance and/or
+  speedup of the upgrade.
+
+  The upgrade instructions consider a basic usage and do not match
+  complex scenarios like replication, sharding, or similar.
+
+  Upgrade instructions:
+
+  First stop your PostgreSQL, create PostgreSQL-binaries and backup your data.
+  If you have another Version of PostgreSQL installed, for example 13, your
+  files are named according to this.
+
+  # service postgresql stop
+  # pkg create postgresql13-server postgresql13-contrib
+  # mkdir /tmp/pg-upgrade
+  # tar xf postgresql13-server-13.12.pkg -C /tmp/pg-upgrade
+  # tar xf postgresql13-contrib-13.12.pkg -C /tmp/pg-upgrade
+  # pkg delete -f databases/postgresql13-server databases/postgresql13-contrib databases/postgresql13-client
+
+  Now update PostgreSQL:
+
+    pkg user:
+    # pkg install databases/postgresql15-server databases/postgresql15-contrib
+    # pkg upgrade
+
+    Portmaster users:
+    # portmaster databases/postgresql15-server databases/postgresql15-contrib
+    # portmaster -a
+
+    Portupgrade users:
+    # portinstall databases/postgresql15-server databases/postgresql15-contrib
+    # portupgrade -a
+
+  After installing the new PostgreSQL version you need to convert
+  all your databases to new version:
+
+  # su -l postgres -c "/usr/local/bin/initdb --encoding=utf-8 --lc-collate=C -D /var/db/postgres/data15 -U postgres"
+  # su -l postgres -c "pg_upgrade -b /tmp/pg-upgrade/usr/local/bin/ -d /var/db/postgres/data13/ -B /usr/local/bin/ -D /var/db/postgres/data15/ -U postgres "
+
+  Now the migration is finished. You can start PostgreSQL again with:
+
+  # service postgresql start
+
+  ATTENTION:
+  1) The default user changed from "pgsql" to "postgres" in 11. The migration steps above now assume
+     the "postgres" database user and FreeBSD user.
+  2) See the updating entry 20190829 if you are updating from a release prior to 11.
+  3) If you use non-default initdb options, you have to adjust the initdb-command accordingly
+
+20230906:
+  AUTHOR: jrm@FreeBSD.org
+  AFFECTS: users of sysutils/devcpu-data*
+
+  The CPU microcode ports have been reorganized.  The new ports are:
+  sysutils/cpu-microcode, sysutils/cpu-microcode-amd,
+  sysutils/cpu-microcode-intel, and cpu-microcode-rc.
+
+  To install all CPU microcode packages:
+
+     pkg install cpu-microcode
+
+  To install only packages for a specific CPU vendor:
+
+     pkg install cpu-microcode-amd
+
+     or
+
+     pkg install cpu-microcode-intel
+
+  To give users time to adjust to these changes, sysutils/devcpu-data will
+  remain in the tree until the end of 2023.  The port has been converted to a
+  metaport and now provides the same functionality as sysutils/cpu-microcode.
+
+  Refer to the commit log in bc7829212d153aeff69b439d08e2e3001ef88ba3 for an
+  explanation as to why these changes were made.
+
+20230904:
+  AUTHOR: netchild@FreeBSD.org
+  AFFECTS: users of misc/openhab
+
+  The rc.d script of 4.0.2 had an error which didn't take the user to
+  run openhab into account. After installing the update and stopping
+  openhab run (for the default settings)
+    chown -R openhab:openhab /var/db/openhab/userdata /var/log/openhab
+  If you use other directories for the userdata and logs, you need to
+  adapt accordingly.
+
 20230822:
   AUTHOR: arrowd@FreeBSD.org
   AFFECTS: users of sysutils/polkit together with sysutils/consolekit2
@@ -5002,7 +5330,7 @@ leave you without networking.
 	  Then you will need to rebuild everything that uses libperl.so, you
 	  can do so with:
 
-	portmaster -f `pkg shlib -qR libperl.so.5.26`
+	portmaster `pkg shlib -qR libperl.so.5.26`
 
 	  If, for some reason, this command fails at one point, it is safe to
 	  run it again, it will not rebuild what it already rebuilt, as the

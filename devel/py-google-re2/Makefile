@@ -1,6 +1,5 @@
 PORTNAME=	google-re2
-PORTVERSION=	1.0
-PORTREVISION=	1
+PORTVERSION=	1.1
 CATEGORIES=	devel python
 MASTER_SITES=	PYPI
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -10,11 +9,12 @@ COMMENT=	RE2 Python bindings
 WWW=		https://github.com/google/re2/tree/main/python
 
 LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pybind11>=0:devel/py-pybind11@${PY_FLAVOR}
 LIB_DEPENDS=	libre2.so:devel/re2
 
-USES=		compiler:c11 localbase python
+USES=		compiler:c++17-lang localbase python
 USE_PYTHON=	autoplist concurrent distutils
 
 post-install:

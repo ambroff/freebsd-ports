@@ -1,4 +1,4 @@
---- chrome/browser/extensions/api/settings_private/prefs_util.cc.orig	2023-08-17 07:33:31 UTC
+--- chrome/browser/extensions/api/settings_private/prefs_util.cc.orig	2023-11-03 10:09:45 UTC
 +++ chrome/browser/extensions/api/settings_private/prefs_util.cc
 @@ -195,7 +195,7 @@ const PrefsUtil::TypedPrefMap& PrefsUtil::GetAllowlist
    (*s_allowlist)[::prefs::kSidePanelHorizontalAlignment] =
@@ -15,6 +15,6 @@
        settings_api::PrefType::PREF_TYPE_NUMBER;
 -#if BUILDFLAG(IS_LINUX)
 +#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
-   (*s_allowlist)[::prefs::kUsesSystemThemeDeprecated] =
-       settings_api::PrefType::PREF_TYPE_BOOLEAN;
    (*s_allowlist)[::prefs::kSystemTheme] =
+       settings_api::PrefType::PREF_TYPE_NUMBER;
+ #endif

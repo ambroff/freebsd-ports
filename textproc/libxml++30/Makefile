@@ -5,9 +5,9 @@ CATEGORIES=	textproc
 MASTER_SITES=	GNOME
 PKGNAMESUFFIX=	30
 
-MAINTAINER=	bland@FreeBSD.org
+MAINTAINER=	gnome@FreeBSD.org
 COMMENT=	XML API for C++
-WWW=		http://libxmlplusplus.sourceforge.net/
+WWW=		https://libxmlplusplus.sourceforge.net/
 
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/COPYING

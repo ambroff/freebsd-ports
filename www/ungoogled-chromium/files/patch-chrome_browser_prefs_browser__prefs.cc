@@ -1,6 +1,6 @@
---- chrome/browser/prefs/browser_prefs.cc.orig	2023-08-18 10:26:52 UTC
+--- chrome/browser/prefs/browser_prefs.cc.orig	2023-11-04 07:08:51 UTC
 +++ chrome/browser/prefs/browser_prefs.cc
-@@ -462,13 +462,13 @@
+@@ -482,18 +482,18 @@
  #endif
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
@@ -16,7 +16,13 @@
      (BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS))
  #include "chrome/browser/browser_switcher/browser_switcher_prefs.h"
  #endif
-@@ -501,7 +501,7 @@
+ 
+-#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
++#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
+ #include "chrome/browser/enterprise/signin/enterprise_signin_prefs.h"
+ #endif
+ 
+@@ -525,7 +525,7 @@
  #include "chrome/browser/sessions/session_service_log.h"
  #endif
  
@@ -25,7 +31,7 @@
  #include "ui/color/system_theme.h"
  #endif
  
-@@ -706,7 +706,7 @@ const char kPluginsPluginsList[] = "plugins.plugins_li
+@@ -671,7 +671,7 @@ const char kPluginsPluginsList[] = "plugins.plugins_li
  const char kPluginsShowDetails[] = "plugins.show_details";
  
  // Deprecated 02/2023.
@@ -34,7 +40,7 @@
  const char kWebAppsUrlHandlerInfo[] = "web_apps.url_handler_info";
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
  
-@@ -949,7 +949,7 @@ void RegisterLocalStatePrefsForMigration(PrefRegistryS
+@@ -992,7 +992,7 @@ void RegisterLocalStatePrefsForMigration(PrefRegistryS
  #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
  
    // Deprecated 02/2023.
@@ -43,16 +49,7 @@
    registry->RegisterDictionaryPref(kWebAppsUrlHandlerInfo);
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
  
-@@ -1100,7 +1100,7 @@ void RegisterProfilePrefsForMigration(
-   registry->RegisterIntegerPref(kProfileAvatarTutorialShown, 0);
- #endif
- 
--#if BUILDFLAG(IS_LINUX)
-+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
-   // Deprecated 08/2022.
-   registry->RegisterBooleanPref(prefs::kUsesSystemThemeDeprecated, false);
- #endif
-@@ -1855,12 +1855,12 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySync
+@@ -1943,12 +1943,12 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySync
  #endif
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
@@ -65,9 +62,9 @@
 -#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
 +#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
    browser_switcher::BrowserSwitcherPrefs::RegisterProfilePrefs(registry);
+   enterprise_signin::RegisterProfilePrefs(registry);
  #endif
- 
-@@ -2013,7 +2013,7 @@ void MigrateObsoleteLocalStatePrefs(PrefService* local
+@@ -2103,7 +2103,7 @@ void MigrateObsoleteLocalStatePrefs(PrefService* local
  #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
  
    // Added 02/2023
@@ -76,12 +73,3 @@
    local_state->ClearPref(kWebAppsUrlHandlerInfo);
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
  
-@@ -2178,7 +2178,7 @@ void MigrateObsoleteProfilePrefs(Profile* profile) {
-   profile_prefs->ClearPref(kProfileAvatarTutorialShown);
- #endif
- 
--#if BUILDFLAG(IS_LINUX)
-+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
-   // Added 08/2022.
-   if (profile_prefs->HasPrefPath(prefs::kUsesSystemThemeDeprecated)) {
-     auto migrated_theme =

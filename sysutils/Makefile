@@ -88,10 +88,11 @@
     SUBDIR += backuppc-devel
     SUBDIR += backuppc4
     SUBDIR += backupuser
+    SUBDIR += bacnet-stack-apps
+    SUBDIR += bacula-libs3
     SUBDIR += bacula11-client
     SUBDIR += bacula11-client-static
     SUBDIR += bacula11-docs
-    SUBDIR += bacula11-libs3
     SUBDIR += bacula11-server
     SUBDIR += bacula13-client
     SUBDIR += bacula13-client-static
@@ -106,9 +107,6 @@
     SUBDIR += bareos-client
     SUBDIR += bareos-server
     SUBDIR += bareos-traymonitor
-    SUBDIR += bareos19-client
-    SUBDIR += bareos19-server
-    SUBDIR += bareos19-traymonitor
     SUBDIR += bareos20-client
     SUBDIR += bareos20-server
     SUBDIR += bareos20-traymonitor
@@ -186,8 +184,10 @@
     SUBDIR += cdrtools
     SUBDIR += cfengine
     SUBDIR += cfengine-devel
+    SUBDIR += cfengine-lts
     SUBDIR += cfengine-masterfiles
     SUBDIR += cfengine-masterfiles-devel
+    SUBDIR += cfengine-masterfiles-lts
     SUBDIR += cfengine-masterfiles320
     SUBDIR += cfengine-masterfiles321
     SUBDIR += cfengine-masterfiles322
@@ -283,6 +283,7 @@
     SUBDIR += deltup
     SUBDIR += desktop-installer
     SUBDIR += detox
+    SUBDIR += devcpu-data
     SUBDIR += devctl-jail-kmod
     SUBDIR += devd-mount
     SUBDIR += devedeng
@@ -374,6 +375,7 @@
     SUBDIR += exa
     SUBDIR += exfat-utils
     SUBDIR += extipl
+    SUBDIR += eza
     SUBDIR += ezjail
     SUBDIR += f2
     SUBDIR += f3
@@ -384,6 +386,7 @@
     SUBDIR += fanout
     SUBDIR += fastfetch
     SUBDIR += fatback
+    SUBDIR += fclones
     SUBDIR += fcode-utils
     SUBDIR += fconfig
     SUBDIR += fcron
@@ -407,6 +410,7 @@
     SUBDIR += flasher
     SUBDIR += flashrom
     SUBDIR += flexbackup
+    SUBDIR += flipperbit
     SUBDIR += flock
     SUBDIR += flog
     SUBDIR += flowgger
@@ -599,7 +603,6 @@
     SUBDIR += ipsc
     SUBDIR += isc-cron
     SUBDIR += isomaster
-    SUBDIR += istatserver
     SUBDIR += istio
     SUBDIR += jadm
     SUBDIR += jail-primer
@@ -676,6 +679,7 @@
     SUBDIR += libtree
     SUBDIR += libudisks
     SUBDIR += liburcu
+    SUBDIR += limine
     SUBDIR += lineak-defaultplugin
     SUBDIR += lineak-xosdplugin
     SUBDIR += lineakd
@@ -695,7 +699,6 @@
     SUBDIR += loganalyzer
     SUBDIR += logrotate
     SUBDIR += logstalgia
-    SUBDIR += logstash-forwarder
     SUBDIR += logstash7
     SUBDIR += logstash8
     SUBDIR += logtool
@@ -795,7 +798,6 @@
     SUBDIR += msiklm
     SUBDIR += msktutil
     SUBDIR += mstflint
-    SUBDIR += mstflint-lite
     SUBDIR += msyslog
     SUBDIR += mtm
     SUBDIR += mtpfs
@@ -819,7 +821,6 @@
     SUBDIR += nerdctl
     SUBDIR += netevent
     SUBDIR += nfcutils
-    SUBDIR += nfs-over-tls
     SUBDIR += nitrogen
     SUBDIR += nix
     SUBDIR += nmrpflash
@@ -1047,6 +1048,7 @@
     SUBDIR += procenv
     SUBDIR += process-viewer
     SUBDIR += procmap
+    SUBDIR += procs
     SUBDIR += progsreiserfs
     SUBDIR += pslist
     SUBDIR += psmisc
@@ -1082,6 +1084,7 @@
     SUBDIR += py-croniter
     SUBDIR += py-dict-toolbox
     SUBDIR += py-diffoscope
+    SUBDIR += py-director
     SUBDIR += py-dirsync
     SUBDIR += py-distro
     SUBDIR += py-dlipower
@@ -1197,7 +1200,6 @@
     SUBDIR += rovclock
     SUBDIR += rpi-firmware
     SUBDIR += rset
-    SUBDIR += rsfetch
     SUBDIR += rshim-user-space
     SUBDIR += rsnapshot
     SUBDIR += rsyncbackup
@@ -1297,7 +1299,8 @@
     SUBDIR += rubygem-winrm-elevated
     SUBDIR += rubygem-winrm-fs
     SUBDIR += rubygem-yell
-    SUBDIR += rundeck3
+    SUBDIR += runas
+    SUBDIR += rundeck
     SUBDIR += runiq
     SUBDIR += runit
     SUBDIR += runit-faster
@@ -1399,6 +1402,7 @@
     SUBDIR += symlinks
     SUBDIR += symon
     SUBDIR += synergy
+    SUBDIR += syngesture
     SUBDIR += sysctlbyname-improved-kmod
     SUBDIR += sysctlinfo-kmod
     SUBDIR += sysgather
@@ -1406,7 +1410,6 @@
     SUBDIR += syslinux
     SUBDIR += syslog-ng
     SUBDIR += syslogger
-    SUBDIR += sysrc
     SUBDIR += sysvbanner
     SUBDIR += szyszka
     SUBDIR += tai64nfrac
@@ -1473,6 +1476,7 @@
     SUBDIR += u-boot-bananapi
     SUBDIR += u-boot-bananapim2
     SUBDIR += u-boot-beaglebone
+    SUBDIR += u-boot-bhyve-arm64
     SUBDIR += u-boot-chip
     SUBDIR += u-boot-clearfog
     SUBDIR += u-boot-cubieboard

@@ -1,6 +1,6 @@
 PORTNAME=	onlyoffice-documentserver
 DISTVERSIONPREFIX=	v
-DISTVERSION=	7.4.0.163
+DISTVERSION=	7.4.1.36
 CATEGORIES=	www
 MASTER_SITES+=	LOCAL/mikael/v8/:source1 \
 		LOCAL/mikael/onlyoffice/:source2 \
@@ -27,7 +27,7 @@ BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}Jinja2>=0:devel/py-Jinja2@${PY_FLAVOR} \
 		java:java/openjdk11 \
 		ninja:devel/ninja \
 		npm:www/npm-node16 \
-		${LOCALBASE}/lib/libcrypto.a:security/openssl30
+		${LOCALBASE}/lib/libcrypto.a:security/openssl
 LIB_DEPENDS=	libboost_regex.so:devel/boost-libs \
 		libcurl.so:ftp/curl \
 		libharfbuzz.so:print/harfbuzz \
@@ -228,10 +228,9 @@ do-install:
 create-caches-tarball:
 	# do some cleanup first
 	${RM} -r  ${WRKDIR}/.npm/_logs ${WRKDIR}/.npm/_update-notifier-last-checked ${WRKDIR}/.cache/yarn/v6/.tmp ${WRKDIR}/.cache/node-gyp
-	${FIND} ${WRKDIR}/.cache -type f -perm 755 -exec file {} \; | ${EGREP} "ELF|PE32+|Mach-O" | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${RM}
 	${FIND} ${WRKDIR}/.pkg-cache -type f -perm 755 -exec file {} \; | ${EGREP} "ELF|PE32+|Mach-O" | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${RM}
 
 	cd ${WRKDIR} && \
-		${TAR} czf ${PORTNAME}-${DISTVERSION}-npm-cache.tar.gz .npm .cache .pkg-cache
+		${TAR} czf ${PORTNAME}-${DISTVERSION}-npm-cache.tar.gz .npm .pkg-cache
 
 .include <bsd.port.mk>

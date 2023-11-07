@@ -1,6 +1,6 @@
---- third_party/blink/renderer/platform/video_capture/video_capture_impl.cc.orig	2023-06-05 19:39:05 UTC
+--- third_party/blink/renderer/platform/video_capture/video_capture_impl.cc.orig	2023-11-04 07:08:51 UTC
 +++ third_party/blink/renderer/platform/video_capture/video_capture_impl.cc
-@@ -572,7 +572,7 @@ bool VideoCaptureImpl::VideoFrameBufferPreparer::BindV
+@@ -623,7 +623,7 @@ bool VideoCaptureImpl::VideoFrameBufferPreparer::BindV
    }
  
    const unsigned texture_target =

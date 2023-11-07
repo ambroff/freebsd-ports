@@ -1,5 +1,6 @@
 PORTNAME?=	nginx
-PORTVERSION=	1.25.2
+PORTVERSION=	1.25.3
+PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	https://nginx.org/download/ \
 		LOCAL/osa
@@ -77,7 +78,7 @@ OPTIONS_GROUP_MAILGRP=	MAIL MAIL_IMAP MAIL_POP3 MAIL_SMTP MAIL_SSL
 OPTIONS_GROUP_STREAMGRP=	STREAM STREAM_REALIP STREAM_SSL \
 	STREAM_SSL_PREREAD
 
-OPTIONS_DEFINE=		DEBUG DEBUGLOG DSO FILE_AIO IPV6 NJS NJS_XML THREADS WWW
+OPTIONS_DEFINE=		DEBUG DEBUGLOG DSO FILE_AIO IPV6 NJS NJS_XML OTEL THREADS WWW
 OPTIONS_DEFAULT?=	DSO FILE_AIO HTTP HTTP_ADDITION HTTP_AUTH_REQ HTTP_CACHE \
 		HTTP_DAV HTTP_FLV HTTP_GUNZIP_FILTER HTTP_GZIP_STATIC HTTP_MP4 \
 		HTTP_RANDOM_INDEX HTTP_REALIP HTTP_SECURE_LINK HTTP_SLICE HTTP_SSL \
@@ -264,6 +265,10 @@ pre-everything::
 .endif
 	@${ECHO_MSG}
 
+post-extract-NAXSI-on:
+	@${RMDIR} ${WRKSRC_naxsi}/naxsi_src/libinjection
+	@${LN} -s ${WRKSRC_libinjection} ${WRKSRC_naxsi}/naxsi_src/libinjection
+
 pre-patch-HTTPV3-on:
 	@${MV} ${WRKSRC}/README ${WRKSRC}/README.1st
 
@@ -272,6 +277,9 @@ post-patch:
 		s!%%PREFIX%%!${PREFIX}!; \
 		s!%%NGINX_ERRORLOG%%!${NGINX_ERRORLOG}!' \
 		${WRKSRC}/conf/nginx.conf
+
+post-patch-BROTLI-on:
+	@${REINPLACE_CMD} 's!%%PREFIX%%!${LOCALBASE}!g' ${WRKSRC_brotli}/filter/config
 
 post-patch-DRIZZLE-on:
 	@${REINPLACE_CMD} 's!%%PREFIX%%!${LOCALBASE}!g' ${WRKSRC_drizzle}/config
@@ -354,7 +362,7 @@ do-install-LINK-on:
 
 do-install-NAXSI-on:
 	${INSTALL_DATA} \
-	${WRKDIR}/naxsi-${NAXSI_NGINX_VER}/naxsi_config/naxsi_core.rules \
+	${WRKDIR}/naxsi-${NAXSI_NGINX_VER}/naxsi_rules/naxsi_core.rules \
 	${STAGEDIR}${ETCDIR}
 .endif
 

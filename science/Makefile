@@ -64,7 +64,6 @@
     SUBDIR += coordgenlibs
     SUBDIR += cp2k
     SUBDIR += cp2k-data
-    SUBDIR += crf++
     SUBDIR += csvtk
     SUBDIR += dakota
     SUBDIR += dalton
@@ -203,6 +202,7 @@
     SUBDIR += mstore
     SUBDIR += multicharge
     SUBDIR += multiwfn
+    SUBDIR += mutationpp
     SUBDIR += namd
     SUBDIR += nest
     SUBDIR += netcdf
@@ -451,6 +451,7 @@
     SUBDIR += qcl
     SUBDIR += qiskit-aer
     SUBDIR += qmcpack
+    SUBDIR += qt6-quick3dphysics
     SUBDIR += quantum-espresso
     SUBDIR += quantum-espresso-pseudopotentials
     SUBDIR += quantum-jet

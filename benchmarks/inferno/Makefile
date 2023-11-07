@@ -1,6 +1,7 @@
 PORTNAME=	inferno
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.11.16
+DISTVERSION=	0.11.17
+PORTREVISION=	1
 CATEGORIES=	benchmarks
 
 MAINTAINER=	yuri@FreeBSD.org
@@ -159,6 +160,7 @@ CARGO_CRATES=	adler32-1.2.0 \
 		windows_x86_64_msvc-0.48.5 \
 		yansi-0.5.1
 EXECUTABLES=	inferno-collapse-dtrace \
+		inferno-collapse-ghcprof \
 		inferno-collapse-guess \
 		inferno-collapse-perf \
 		inferno-collapse-recursive \

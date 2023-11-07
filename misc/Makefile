@@ -424,6 +424,8 @@
     SUBDIR += py-icoextract
     SUBDIR += py-ipyfastscape
     SUBDIR += py-kartograph
+    SUBDIR += py-laspy
+    SUBDIR += py-lazrs
     SUBDIR += py-lightgbm
     SUBDIR += py-lightning-utilities
     SUBDIR += py-log_symbols
@@ -502,10 +504,12 @@
     SUBDIR += qt6-examples
     SUBDIR += qt6ct
     SUBDIR += quantum++
+    SUBDIR += randomx
     SUBDIR += raspberrypi-gpioshutdown
     SUBDIR += raspberrypi-userland
     SUBDIR += raspbsd-led
     SUBDIR += ree
+    SUBDIR += retry
     SUBDIR += rfc
     SUBDIR += ringtonetools
     SUBDIR += rname
@@ -558,6 +562,7 @@
     SUBDIR += table.el
     SUBDIR += talkfilters
     SUBDIR += tdfiglet
+    SUBDIR += tdrop
     SUBDIR += team
     SUBDIR += tellico
     SUBDIR += tempcontrol

@@ -1,5 +1,5 @@
 PORTNAME=	pytest
-PORTVERSION=	7.4.0
+PORTVERSION=	7.4.3
 PORTEPOCH=	1
 CATEGORIES=	devel python
 MASTER_SITES=	PYPI
@@ -12,13 +12,12 @@ WWW=		https://docs.pytest.org/en/latest/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	${PY_SETUPTOOLS} \
+BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}setuptools>=45.0:devel/py-setuptools@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}setuptools_scm>=6.2.3:devel/py-setuptools_scm@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}wheel>=0:devel/py-wheel@${PY_FLAVOR}
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}iniconfig>=0:devel/py-iniconfig@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}packaging>=0:devel/py-packaging@${PY_FLAVOR} \
-		${PYTHON_PKGNAMEPREFIX}pluggy>=0.12<2.0:devel/py-pluggy@${PY_FLAVOR} \
-		${PYTHON_PKGNAMEPREFIX}py>=1.8.2:devel/py-py@${PY_FLAVOR}
+		${PYTHON_PKGNAMEPREFIX}pluggy>=0.12<2.0:devel/py-pluggy@${PY_FLAVOR}
 TEST_DEPENDS=	bash:shells/bash \
 		lsof:sysutils/lsof \
 		${PYTHON_PKGNAMEPREFIX}argcomplete>=0:devel/py-argcomplete@${PY_FLAVOR} \

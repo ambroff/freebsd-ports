@@ -1,15 +1,15 @@
 PORTNAME=	boringssl
-PORTVERSION=	0.0.0.0.2023.08.25.01
+PORTVERSION=	0.0.0.0.2023.11.01.01
 CATEGORIES=	security
 MASTER_SITES+=	https://proxy.golang.org/:gomods
-DISTFILES+=	golang.org/x/crypto/@v/v0.10.0.zip:gomods \
-		golang.org/x/crypto/@v/v0.10.0.mod:gomods \
-		golang.org/x/net/@v/v0.11.0.zip:gomods \
-		golang.org/x/net/@v/v0.11.0.mod:gomods \
-		golang.org/x/sys/@v/v0.9.0.zip:gomods \
-		golang.org/x/sys/@v/v0.9.0.mod:gomods \
-		golang.org/x/term/@v/v0.9.0.zip:gomods \
-		golang.org/x/term/@v/v0.9.0.mod:gomods
+DISTFILES+=	golang.org/x/crypto/@v/v0.14.0.zip:gomods \
+		golang.org/x/crypto/@v/v0.14.0.mod:gomods \
+		golang.org/x/net/@v/v0.17.0.zip:gomods \
+		golang.org/x/net/@v/v0.17.0.mod:gomods \
+		golang.org/x/sys/@v/v0.13.0.zip:gomods \
+		golang.org/x/sys/@v/v0.13.0.mod:gomods \
+		golang.org/x/term/@v/v0.13.0.zip:gomods \
+		golang.org/x/term/@v/v0.13.0.mod:gomods
 EXTRACT_ONLY=	${GH_ACCOUNT}-${PORTNAME}-${PORTVERSION}-${GH_TAGNAME}_GH0.tar.gz
 
 MAINTAINER=	osa@FreeBSD.org
@@ -22,13 +22,13 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 USES=		cmake:insource cpe go:no_targets localbase perl5
 
 CONFLICTS_INSTALL=	libressl libressl-devel \
-			openssl openssl3[01] openssl-quictls
+			openssl openssl3[012] openssl-quictls
 
 CPE_VENDOR=	google
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	google
-GH_TAGNAME=	792e77c
+GH_TAGNAME=	d2a2913
 CMAKE_ARGS+=	-DBUILD_SHARED_LIBS=1
 
 USE_LDCONFIG=	yes

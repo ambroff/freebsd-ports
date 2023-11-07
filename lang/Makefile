@@ -35,10 +35,12 @@
     SUBDIR += coffeescript
     SUBDIR += colm
     SUBDIR += cparser
+    SUBDIR += crumb
     SUBDIR += crystal
     SUBDIR += csharp-mode.el
     SUBDIR += cython
     SUBDIR += cython-devel
+    SUBDIR += cython3
     SUBDIR += dhall
     SUBDIR += dlang-tools
     SUBDIR += duktape
@@ -51,6 +53,7 @@
     SUBDIR += elk
     SUBDIR += elm
     SUBDIR += emacs-lisp-intro
+    SUBDIR += emilua
     SUBDIR += erlang
     SUBDIR += erlang-doc
     SUBDIR += erlang-java
@@ -71,6 +74,8 @@
     SUBDIR += ficl
     SUBDIR += fpc
     SUBDIR += fpc-base
+    SUBDIR += fpc-devel
+    SUBDIR += fpc-devel-source
     SUBDIR += fpc-docs
     SUBDIR += fpc-lua
     SUBDIR += fpc-pastojs
@@ -144,6 +149,7 @@
     SUBDIR += hs-unlambda
     SUBDIR += huc
     SUBDIR += icc
+    SUBDIR += inko
     SUBDIR += intel-compute-runtime
     SUBDIR += intercal
     SUBDIR += io
@@ -216,7 +222,9 @@
     SUBDIR += nickle
     SUBDIR += nim
     SUBDIR += njs
+    SUBDIR += nll
     SUBDIR += nqc
+    SUBDIR += numbat
     SUBDIR += nwcc
     SUBDIR += nx
     SUBDIR += nyan
@@ -224,7 +232,6 @@
     SUBDIR += ocaml-autoconf
     SUBDIR += ocaml-camlidl
     SUBDIR += ocaml-nox11
-    SUBDIR += onyx
     SUBDIR += oo2c
     SUBDIR += opencoarrays
     SUBDIR += opensycl
@@ -263,7 +270,6 @@
     SUBDIR += pbasic
     SUBDIR += pcc
     SUBDIR += perl5-devel
-    SUBDIR += perl5.32
     SUBDIR += perl5.34
     SUBDIR += perl5.36
     SUBDIR += perl5.38
@@ -318,6 +324,7 @@
     SUBDIR += rexx-regutil
     SUBDIR += rexx-wrapper
     SUBDIR += rhino
+    SUBDIR += rizin
     SUBDIR += ruby30
     SUBDIR += ruby31
     SUBDIR += ruby32
@@ -328,6 +335,7 @@
     SUBDIR += rust
     SUBDIR += rust-bootstrap
     SUBDIR += rust-nightly
+    SUBDIR += s7
     SUBDIR += sagittarius-scheme
     SUBDIR += sather-specification
     SUBDIR += sather-tutorial

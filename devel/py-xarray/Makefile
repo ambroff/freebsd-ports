@@ -1,5 +1,5 @@
 PORTNAME=	xarray
-PORTVERSION=	2023.8.0
+PORTVERSION=	2023.10.1
 CATEGORIES=	devel python
 MASTER_SITES=	PYPI
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -28,7 +28,7 @@ TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}cartopy>=0:graphics/py-cartopy@${PY_FLAVOR}
 		${PYTHON_PKGNAMEPREFIX}sparse>=0:devel/py-sparse@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}zarr>=0:devel/py-zarr@${PY_FLAVOR}
 
-USES=		python
+USES=		python:3.9+
 USE_PYTHON=	autoplist concurrent distutils pytest
 
 NO_ARCH=	yes

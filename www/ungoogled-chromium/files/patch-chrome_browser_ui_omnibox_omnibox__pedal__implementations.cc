@@ -1,6 +1,6 @@
---- chrome/browser/ui/omnibox/omnibox_pedal_implementations.cc.orig	2023-08-18 10:26:52 UTC
+--- chrome/browser/ui/omnibox/omnibox_pedal_implementations.cc.orig	2023-11-04 07:08:51 UTC
 +++ chrome/browser/ui/omnibox/omnibox_pedal_implementations.cc
-@@ -1960,7 +1960,7 @@ const gfx::VectorIcon& GetSharingHubVectorIcon() {
+@@ -1981,7 +1981,7 @@ const gfx::VectorIcon& GetSharingHubVectorIcon() {
                   OmniboxFieldTrial::IsChromeRefreshActionChipIconsEnabled()
               ? omnibox::kShareWinChromeRefreshIcon
               : omnibox::kShareWinIcon;

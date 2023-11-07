@@ -1,21 +1,21 @@
---- ui/gfx/x/xlib_support.cc.orig	2022-10-01 07:40:07 UTC
+--- ui/gfx/x/xlib_support.cc.orig	2023-11-04 07:08:51 UTC
 +++ ui/gfx/x/xlib_support.cc
-@@ -38,10 +38,18 @@ void InitXlib() {
-   if (xlib_loader->loaded())
+@@ -39,10 +39,18 @@ void InitXlib() {
      return;
+   }
  
-+#if defined(OS_BSD)
-+  CHECK(xlib_loader->Load("libX11.so"));
++#if BUILDFLAG(IS_BSD)
++  DUMP_WILL_BE_CHECK(xlib_loader->Load("libX11.so"));
 +#else
-   CHECK(xlib_loader->Load("libX11.so.6"));
+   DUMP_WILL_BE_CHECK(xlib_loader->Load("libX11.so.6"));
 +#endif
  
    auto* xlib_xcb_loader = GetXlibXcbLoader();
-+#if defined(OS_BSD)
-+  CHECK(xlib_xcb_loader->Load("libX11-xcb.so"));
++#if BUILDFLAG(IS_BSD)
++  DUMP_WILL_BE_CHECK(xlib_xcb_loader->Load("libX11-xcb.so"));
 +#else
-   CHECK(xlib_xcb_loader->Load("libX11-xcb.so.1"));
+   DUMP_WILL_BE_CHECK(xlib_xcb_loader->Load("libX11-xcb.so.1"));
 +#endif
  
-   CHECK(xlib_loader->XInitThreads());
+   DUMP_WILL_BE_CHECK(xlib_loader->XInitThreads());
  

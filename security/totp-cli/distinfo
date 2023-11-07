@@ -1,5 +1,5 @@
-TIMESTAMP = 1691069932
-SHA256 (go/security_totp-cli/totp-cli-v1.5.0/v1.5.0.mod) = 25b99d327a12c2163fe05734632136d90d33e9b80b3fb04844a48c903edbca03
-SIZE (go/security_totp-cli/totp-cli-v1.5.0/v1.5.0.mod) = 683
-SHA256 (go/security_totp-cli/totp-cli-v1.5.0/v1.5.0.zip) = 1b2101eb0717f5e3db2cee3ae496c3e8b7920de6b3ca45d08b2e1ed5b3412861
-SIZE (go/security_totp-cli/totp-cli-v1.5.0/v1.5.0.zip) = 35598
+TIMESTAMP = 1698340933
+SHA256 (go/security_totp-cli/totp-cli-v1.8.2/v1.8.2.mod) = 7844a85072519faad7dbb9da103dc628f3c55bd04b9501ff04d2ec02e88e7f92
+SIZE (go/security_totp-cli/totp-cli-v1.8.2/v1.8.2.mod) = 574
+SHA256 (go/security_totp-cli/totp-cli-v1.8.2/v1.8.2.zip) = ab415a0bde7179dc475f0925d20f0577919c356133876f99ba3fbccb0c90ea49
+SIZE (go/security_totp-cli/totp-cli-v1.8.2/v1.8.2.zip) = 37748

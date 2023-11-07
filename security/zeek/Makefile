@@ -1,5 +1,5 @@
 PORTNAME=	zeek
-DISTVERSION=	6.0.0
+DISTVERSION=	6.0.2
 CATEGORIES=	security
 MASTER_SITES=	https://download.zeek.org/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -13,14 +13,13 @@ LICENSE=	CC-BY-4.0
 BROKEN_FreeBSD_12_powerpc64=	does not build: error: zero-size array 'names'
 
 BUILD_DEPENDS=	bison>=3.3:devel/bison \
-		cmake>=3.15.0:devel/cmake \
 		flex>=2.6:textproc/flex \
 		swig>=4.0.2:devel/swig
 LIB_DEPENDS=	libcares.so:dns/c-ares
 RUN_DEPENDS=	c-ares>=1.18.1:dns/c-ares
 
 USES=		bison cmake compiler:c++17-lang cpe gettext-runtime perl5 \
-		python:3.7+ shebangfix ssl
+		python shebangfix ssl
 
 USE_LDCONFIG=	yes
 

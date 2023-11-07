@@ -1,5 +1,5 @@
 PORTNAME=	webstorm
-PORTVERSION=	2023.2
+DISTVERSION=	2023.2.4
 CATEGORIES=	devel java
 MASTER_SITES=	https://download-cdn.jetbrains.com/webstorm/
 PKGNAMEPREFIX=	jetbrains-
@@ -21,7 +21,7 @@ RUN_DEPENDS=	intellij-fsnotifier>0:java/intellij-fsnotifier \
 		jetbrains-sqlite>=232.8660.185:devel/jetbrains-sqlite \
 		lsof:sysutils/lsof
 
-USES=		cpe python:run shebangfix
+USES=		cpe desktop-file-utils python:run shebangfix
 
 CPE_VENDOR=	jetbrains
 USE_JAVA=	yes
@@ -36,7 +36,7 @@ NO_BUILD=	yes
 SUB_FILES=	${PORTNAME} ${PORTNAME}.desktop pkg-message
 SUB_LIST=	JAVA_HOME=${JAVA_HOME}
 
-WRKSRC=		${WRKDIR}/WebStorm-232.8660.143
+WRKSRC=		${WRKDIR}/WebStorm-232.10203.14
 
 do-install:
 # Linux/Windows/OS X only so remove them
@@ -62,7 +62,7 @@ do-install:
 	${INSTALL_MAN} ${FILESDIR}/${PORTNAME}.1 ${STAGEDIR}${PREFIX}/man/man1
 	${INSTALL_DATA} ${WRKDIR}/${PORTNAME}.desktop ${STAGEDIR}${PREFIX}/share/applications/
 # Use fsnotifier replacement provided by java/intellij-fsnotifier
-	${ECHO} "idea.filewatcher.executable.path=${PREFIX}/intellij/bin/fsnotifier" >> ${STAGEDIR}${DATADIR}/bin/idea.properties
+	${ECHO} "idea.filewatcher.executable.path=${PREFIX}/bin/fsnotifier" >> ${STAGEDIR}${DATADIR}/bin/idea.properties
 # Install FreeBSD native lib provided by devel/jna
 	@${MKDIR} ${WRKDIR}/jna
 	@(cd ${WRKDIR}/jna && ${JAR} xf ${JAVAJARDIR}/jna.jar com/sun/jna/freebsd-x86-64/libjnidispatch.so)

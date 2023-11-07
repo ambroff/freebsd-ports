@@ -1,4 +1,4 @@
---- base/threading/platform_thread_unittest.cc.orig	2023-07-21 09:49:17 UTC
+--- base/threading/platform_thread_unittest.cc.orig	2023-11-04 07:08:51 UTC
 +++ base/threading/platform_thread_unittest.cc
 @@ -32,7 +32,7 @@
  #include "base/time/time.h"
@@ -16,9 +16,9 @@
 -#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
 +#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_BSD)
    // On Ubuntu, RLIMIT_NICE and RLIMIT_RTPRIO are 0 by default, so we won't be
-   // able to increase priority to any level.
-   constexpr bool kCanIncreasePriority = false;
-@@ -698,12 +698,16 @@ INSTANTIATE_TEST_SUITE_P(
+   // able to increase priority to any level unless we are root (euid == 0).
+   bool kCanIncreasePriority = false;
+@@ -706,12 +706,16 @@ INSTANTIATE_TEST_SUITE_P(
  
  #endif  // BUILDFLAG(IS_APPLE)
  

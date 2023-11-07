@@ -4,7 +4,7 @@
 
 PKGNAMEPREFIX=	suitesparse-
 SSPNAME=	suitesparse
-SSPVERSION=	7.1.0
+SSPVERSION=	7.3.1
 DISTVERSIONPREFIX=	v
 
 MAINTAINER=	fortran@FreeBSD.org
@@ -37,7 +37,7 @@ LIB_DEPENDS+=	libsuitesparseconfig.so:math/suitesparse-config
 OPTIONS_DEFINE+=DEMOS
 .endif
 
-USES+=		cmake:insource
+USES+=		cmake:insource pathfix
 
 DOCSDIR=	${PREFIX}/share/doc/${SSPNAME}
 MAKE_ENV=	JOBS="${MAKE_JOBS_NUMBER}" \
@@ -51,21 +51,28 @@ LDFLAGS+=	-L${WRKSRC}/lib # prevent linking with shared libs from the preinstall
 INSTALL_TARGET=	install # skip USES=cmake
 INSTALL_WRKSRC=	${BUILD_WRKSRC}
 
+PLIST_SUB+=	VER=${PORTVERSION}
+
 # FIXME: wont work if .CURDIR contains spaces
 DISTINFO_FILE=	${.CURDIR}/../../math/suitesparse/distinfo
 
 OPTIONS_DEFINE+=	DOCS OPTIMIZED_CFLAGS
 OPTIONS_DEFAULT+=	OPTIMIZED_CFLAGS
 
+.if ${MPORTNAME} == config ||	\
+	${MPORTNAME} == CHOLMOD ||	\
+	${MPORTNAME} == SPQR ||	\
+	${MPORTNAME} == UMFPACK
 OPTIONS_RADIO+=		BLAS
-OPTIONS_RADIO_BLAS+=	ATLAS GOTOBLAS NETLIB OPENBLAS
+OPTIONS_RADIO_BLAS+=	ATLAS BLIS NETLIB OPENBLAS
 OPTIONS_DEFAULT+=	OPENBLAS
+BLIS_DESC=		BLAS implemntation from FLAME
 
 ATLAS_USES=		blaslapack:atlas
-GOTOBLAS_DESC=		Goto blas implementation
-GOTOBLAS_USES=		blaslapack:gotoblas
+BLIS_USES=		blaslapack:blis
 NETLIB_USES=		blaslapack:netlib
 OPENBLAS_USES=		blaslapack:openblas
+.endif
 
 OPTIONS_DEFINE+=	OPENMP
 OPTIONS_EXCLUDE_aarch64=	OPENMP

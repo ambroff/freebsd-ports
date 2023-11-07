@@ -22,9 +22,9 @@ _QT_MK_INCLUDED=	qt.mk
 
 # Qt versions currently supported by the framework.
 _QT_SUPPORTED?=		5 6
-QT5_VERSION?=		5.15.8
-QT6_VERSION?=		6.5.2
-PYSIDE6_VERSION?=	${QT6_VERSION}
+QT5_VERSION?=		5.15.11
+QT6_VERSION?=		6.5.3
+PYSIDE6_VERSION?=	6.5.3
 
 # We accept the Qt version to be passed by either or all of the three mk files.
 .  if empty(qt_ARGS) && empty(qmake_ARGS) && empty(qt-dist_ARGS)
@@ -120,6 +120,12 @@ MAKE_ENV+=		QT_SELECT=${_QT_RELNAME}
 CONFIGURE_ENV+=		QMAKEMODULES="${WRKSRC}/mkspecs/modules:${LOCALBASE}/${QT_MKSPECDIR_REL}/modules"
 MAKE_ENV+=		QMAKEMODULES="${WRKSRC}/mkspecs/modules:${LOCALBASE}/${QT_MKSPECDIR_REL}/modules"
 
+# Qt uses generated linker version scripts which always have a qt_version_tag
+# symbol, but that symbol is only defined in the main Qt shared library. For
+# other Qt components, this leads to lld >= 17 erroring out due to the symbol
+# being undefined. Supress these errors.
+LDFLAGS+=		-Wl,--undefined-version
+
 _USES_POST+=		qt
 .endif # _QT_MK_INCLUDED
 
@@ -131,12 +137,12 @@ _USES_POST+=		qt
 _QT_MK_POST_INCLUDED=	qt.mk
 
 # The Qt components supported by qt.mk: list of shared, and version specific ones
-_USE_QT_COMMON=		3d charts datavis3d declarative doc examples imageformats location \
+_USE_QT_COMMON=		3d charts connectivity datavis3d declarative doc examples imageformats location \
 			multimedia networkauth quick3d quicktimeline remoteobjects scxml \
 			sensors serialbus serialport speech svg virtualkeyboard wayland \
 			webchannel webengine websockets webview
 
-_USE_QT5_ONLY=		assistant buildtools concurrent connectivity core dbus \
+_USE_QT5_ONLY=		assistant buildtools concurrent core dbus \
 			declarative-test designer diag gamepad \
 			graphicaleffects gui help l10n linguist linguisttools \
 			network opengl paths phonon4 pixeltool plugininfo printsupport \
@@ -150,7 +156,7 @@ _USE_QT5_ONLY+=		sql-ibase
 .  endif
 
 _USE_QT6_ONLY=		5compat base httpserver languageserver lottie positioning \
-			quickeffectmaker shadertools tools translations \
+			quick3dphysics quickeffectmaker shadertools tools translations \
 			sqldriver-sqlite sqldriver-mysql sqldriver-psql sqldriver-odbc
 
 # Dependency tuples: _LIB should be preferred if possible.
@@ -293,6 +299,9 @@ qt-qmake_PATH=		${_QT_RELNAME}-qmake>=${_QT_VERSION:R}
 
 qt-quick3d_PORT=	x11-toolkits/${_QT_RELNAME}-quick3d
 qt-quick3d_LIB=		libQt${_QT_LIBVER}Quick3D.so
+
+qt-quick3dphysics_PORT=	science/${_QT_RELNAME}-quick3dphysics
+qt_quick3dphysics_LIB=	libQt${_QT_LIBVER}Quick3DPhysics.so
 
 qt-quickcontrols_PORT=	x11-toolkits/${_QT_RELNAME}-quickcontrols
 qt-quickcontrols_PATH=	${LOCALBASE}/${QT_QMLDIR_REL}/QtQuick/Controls/qmldir

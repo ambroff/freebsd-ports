@@ -1,5 +1,6 @@
 PORTNAME=	health
 DISTVERSION=	0.95.0
+PORTREVISION=	2
 CATEGORIES=	deskutils
 
 MAINTAINER=	jbeich@FreeBSD.org
