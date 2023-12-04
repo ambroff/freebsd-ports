@@ -132,10 +132,10 @@
     SUBDIR += davix
     SUBDIR += dddbl
     SUBDIR += ddgr
+    SUBDIR += deforaos-surfer
     SUBDIR += deno
     SUBDIR += devd
     SUBDIR += dezoomify-rs
-    SUBDIR += dfileserver
     SUBDIR += dillo2
     SUBDIR += dojo
     SUBDIR += dokuwiki
@@ -185,12 +185,6 @@
     SUBDIR += foreign-cdm
     SUBDIR += formication
     SUBDIR += foswiki
-    SUBDIR += fpc-fastcgi
-    SUBDIR += fpc-googleapi
-    SUBDIR += fpc-httpd22
-    SUBDIR += fpc-httpd24
-    SUBDIR += fpc-libmicrohttpd
-    SUBDIR += fpc-webidl
     SUBDIR += free-sa-devel
     SUBDIR += fswiki
     SUBDIR += fusionpbx
@@ -236,7 +230,6 @@
     SUBDIR += gstreamer1-plugins-srt
     SUBDIR += gtkhtml4
     SUBDIR += guacamole-client
-    SUBDIR += guile-www
     SUBDIR += gurl
     SUBDIR += gwsocket
     SUBDIR += h2c
@@ -282,8 +275,6 @@
     SUBDIR += jericho-html
     SUBDIR += jesred
     SUBDIR += jetty10
-    SUBDIR += jetty8
-    SUBDIR += jetty9
     SUBDIR += jira-cli
     SUBDIR += jitsi-meet
     SUBDIR += jmeter
@@ -302,6 +293,7 @@
     SUBDIR += kineto
     SUBDIR += kiwix-tools
     SUBDIR += kohana
+    SUBDIR += ladybird
     SUBDIR += lagrange
     SUBDIR += larbin
     SUBDIR += libapreq2
@@ -330,7 +322,6 @@
     SUBDIR += links
     SUBDIR += links1
     SUBDIR += linux-c7-qtwebkit
-    SUBDIR += linux-opera
     SUBDIR += linux-widevine-cdm
     SUBDIR += litmus
     SUBDIR += ljdeps
@@ -348,8 +339,8 @@
     SUBDIR += lynx
     SUBDIR += lynx-current
     SUBDIR += lzr
-    SUBDIR += madsonic
     SUBDIR += man2web
+    SUBDIR += manpageblog
     SUBDIR += mathjax
     SUBDIR += mathjax3
     SUBDIR += mathopd
@@ -444,7 +435,6 @@
     SUBDIR += moodle42
     SUBDIR += moodle43
     SUBDIR += morty
-    SUBDIR += mozplugger
     SUBDIR += multisort
     SUBDIR += multiwatch
     SUBDIR += mybb
@@ -1433,6 +1423,7 @@
     SUBDIR += phpvirtualbox-legacy
     SUBDIR += piwigo
     SUBDIR += plasma5-plasma-browser-integration
+    SUBDIR += plasma6-plasma-browser-integration
     SUBDIR += pmwiki
     SUBDIR += pnews
     SUBDIR += podcastamatic
@@ -1449,6 +1440,7 @@
     SUBDIR += py-WebError
     SUBDIR += py-WebFlash
     SUBDIR += py-adblock
+    SUBDIR += py-advocate
     SUBDIR += py-aioh2
     SUBDIR += py-aiohttp
     SUBDIR += py-aiohttp-jinja2
@@ -1668,6 +1660,7 @@
     SUBDIR += py-flask-flatpages
     SUBDIR += py-flask-json
     SUBDIR += py-flask-jwt-extended
+    SUBDIR += py-flask-limiter
     SUBDIR += py-flask-login
     SUBDIR += py-flask-marshmallow
     SUBDIR += py-flask-migrate
@@ -1947,7 +1940,6 @@
     SUBDIR += rubygem-amazon-ecs
     SUBDIR += rubygem-anemone
     SUBDIR += rubygem-asana
-    SUBDIR += rubygem-asana1
     SUBDIR += rubygem-async-http
     SUBDIR += rubygem-async-pool
     SUBDIR += rubygem-async-rest
@@ -2236,7 +2228,6 @@
     SUBDIR += rubygem-robots
     SUBDIR += rubygem-roda
     SUBDIR += rubygem-rqrcode
-    SUBDIR += rubygem-rqrcode-rails3
     SUBDIR += rubygem-rqrcode2
     SUBDIR += rubygem-rqrcode_core
     SUBDIR += rubygem-rss
@@ -2351,6 +2342,7 @@
     SUBDIR += suphp
     SUBDIR += surf
     SUBDIR += swiggle
+    SUBDIR += sws
     SUBDIR += tcexam
     SUBDIR += tclhttpd
     SUBDIR += tclwebtest
@@ -2452,7 +2444,6 @@
     SUBDIR += varnish-libvmod-querystring
     SUBDIR += varnish-libvmod-redis
     SUBDIR += varnish-modules
-    SUBDIR += varnish-nagios
     SUBDIR += varnish6
     SUBDIR += varnish7
     SUBDIR += varnish_exporter
@@ -2506,7 +2497,6 @@
     SUBDIR += wuzz
     SUBDIR += wwwoffle
     SUBDIR += xapian-omega
-    SUBDIR += xapian-omega12
     SUBDIR += xcaddy
     SUBDIR += xfce4-smartbookmark-plugin
     SUBDIR += xh

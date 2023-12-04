@@ -159,8 +159,6 @@
     SUBDIR += fizz
     SUBDIR += fl0p
     SUBDIR += flawfinder
-    SUBDIR += fpc-gnutls
-    SUBDIR += fpc-openssl
     SUBDIR += fprint_demo
     SUBDIR += fprintd
     SUBDIR += fragroute
@@ -260,6 +258,7 @@
     SUBDIR += keyprint
     SUBDIR += keysmith
     SUBDIR += kf5-kdesu
+    SUBDIR += kf6-kdesu
     SUBDIR += kgpg
     SUBDIR += kickpass
     SUBDIR += klee
@@ -829,6 +828,9 @@
     SUBDIR += plasma5-kscreenlocker
     SUBDIR += plasma5-ksshaskpass
     SUBDIR += plasma5-kwallet-pam
+    SUBDIR += plasma6-kscreenlocker
+    SUBDIR += plasma6-ksshaskpass
+    SUBDIR += plasma6-kwallet-pam
     SUBDIR += please
     SUBDIR += poly1305aes
     SUBDIR += portacl-rc
@@ -962,6 +964,7 @@
     SUBDIR += py-ntlm-auth
     SUBDIR += py-oauth2client
     SUBDIR += py-oauthlib
+    SUBDIR += py-omemo-dr
     SUBDIR += py-onlykey
     SUBDIR += py-openssl
     SUBDIR += py-oscrypto
@@ -1094,7 +1097,6 @@
     SUBDIR += rubygem-devise-two-factor-rails5
     SUBDIR += rubygem-devise-two-factor-rails61
     SUBDIR += rubygem-devise-two-factor-rails70
-    SUBDIR += rubygem-devise-two-factor40-rails70
     SUBDIR += rubygem-devise-two-factor41-rails70
     SUBDIR += rubygem-devise_pam_authenticatable2
     SUBDIR += rubygem-devise_pam_authenticatable2-rails61
@@ -1317,7 +1319,6 @@
     SUBDIR += tls-check
     SUBDIR += tlsc
     SUBDIR += tor
-    SUBDIR += tor-devel
     SUBDIR += totp-cli
     SUBDIR += tpm-quote-tools
     SUBDIR += tpm-tools

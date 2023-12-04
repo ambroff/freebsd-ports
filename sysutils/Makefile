@@ -224,6 +224,7 @@
     SUBDIR += conky-awesome
     SUBDIR += conman
     SUBDIR += conmon
+    SUBDIR += conserve
     SUBDIR += consolehm
     SUBDIR += consolekit2
     SUBDIR += consul
@@ -420,10 +421,6 @@
     SUBDIR += foremost
     SUBDIR += fortunelock
     SUBDIR += fpart
-    SUBDIR += fpc-syslog
-    SUBDIR += fpc-users
-    SUBDIR += fpc-utmp
-    SUBDIR += fpc-uuid
     SUBDIR += frand
     SUBDIR += freebsd-snapshot
     SUBDIR += freecolor
@@ -534,7 +531,6 @@
     SUBDIR += gstat-rs
     SUBDIR += gstopd
     SUBDIR += gstreamer1-plugins-cdio
-    SUBDIR += gtk-imonc
     SUBDIR += hammer2
     SUBDIR += handlr
     SUBDIR += hardlink
@@ -638,6 +634,9 @@
     SUBDIR += keyd
     SUBDIR += kf5-baloo
     SUBDIR += kf5-kwallet
+    SUBDIR += kf6-baloo
+    SUBDIR += kf6-kuserfeedback
+    SUBDIR += kf6-kwallet
     SUBDIR += kfloppy
     SUBDIR += khelpcenter
     SUBDIR += kiconvtool
@@ -860,7 +859,7 @@
     SUBDIR += openipmi
     SUBDIR += opensbi
     SUBDIR += openseachest
-    SUBDIR += openshift-install
+    SUBDIR += opentofu
     SUBDIR += openupsd
     SUBDIR += openzfs
     SUBDIR += openzfs-kmod
@@ -874,6 +873,7 @@
     SUBDIR += p5-BSD-getloadavg
     SUBDIR += p5-BackupPC-XS
     SUBDIR += p5-Brackup
+    SUBDIR += p5-Command-Runner
     SUBDIR += p5-Device-RAID-Poller
     SUBDIR += p5-Dir-Purge
     SUBDIR += p5-File-BackupCopy
@@ -1027,6 +1027,17 @@
     SUBDIR += plasma5-polkit-kde-agent-1
     SUBDIR += plasma5-powerdevil
     SUBDIR += plasma5-systemsettings
+    SUBDIR += plasma6-drkonqi
+    SUBDIR += plasma6-kde-cli-tools
+    SUBDIR += plasma6-kinfocenter
+    SUBDIR += plasma6-kmenuedit
+    SUBDIR += plasma6-ksystemstats
+    SUBDIR += plasma6-libksysguard
+    SUBDIR += plasma6-plasma-disks
+    SUBDIR += plasma6-plasma-systemmonitor
+    SUBDIR += plasma6-polkit-kde-agent-1
+    SUBDIR += plasma6-powerdevil
+    SUBDIR += plasma6-systemsettings
     SUBDIR += plconfig
     SUBDIR += plocate
     SUBDIR += pmt
@@ -1036,6 +1047,7 @@
     SUBDIR += polkit
     SUBDIR += polkit-gnome
     SUBDIR += polkit-qt
+    SUBDIR += polkit-qt-1-devel
     SUBDIR += pot
     SUBDIR += potnet
     SUBDIR += poweralertd
@@ -1218,16 +1230,12 @@
     SUBDIR += rubygem-capistrano-harrow
     SUBDIR += rubygem-chef
     SUBDIR += rubygem-chef-bin
-    SUBDIR += rubygem-chef-bin17
     SUBDIR += rubygem-chef-cleanroom
     SUBDIR += rubygem-chef-config
-    SUBDIR += rubygem-chef-config17
     SUBDIR += rubygem-chef-telemetry
     SUBDIR += rubygem-chef-utils
-    SUBDIR += rubygem-chef-utils17
     SUBDIR += rubygem-chef-vault
     SUBDIR += rubygem-chef-zero
-    SUBDIR += rubygem-chef17
     SUBDIR += rubygem-choria-mcorpc-support
     SUBDIR += rubygem-facter
     SUBDIR += rubygem-fluent-mixin-plaintextformatter
@@ -1263,7 +1271,6 @@
     SUBDIR += rubygem-mothra
     SUBDIR += rubygem-murder
     SUBDIR += rubygem-ohai
-    SUBDIR += rubygem-ohai17
     SUBDIR += rubygem-parallel
     SUBDIR += rubygem-puppet_forge
     SUBDIR += rubygem-puppetfile-resolver
@@ -1413,6 +1420,7 @@
     SUBDIR += sysvbanner
     SUBDIR += szyszka
     SUBDIR += tai64nfrac
+    SUBDIR += tailspin
     SUBDIR += tarsnap
     SUBDIR += tarsnap-gui
     SUBDIR += tarsnap-periodic
@@ -1644,6 +1652,7 @@
     SUBDIR += xin
     SUBDIR += xjobs
     SUBDIR += xmbmon
+    SUBDIR += xnvme
     SUBDIR += xorriso
     SUBDIR += xosview
     SUBDIR += xpipe

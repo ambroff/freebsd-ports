@@ -1,7 +1,7 @@
 PORTNAME=	subsurface
 DISTVERSIONPREFIX=v
 DISTVERSION=	5.0.10
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	deskutils
 
 MAINTAINER=	romain@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 DEPRECATED=		Depends on deprecated www/qt5-webkit
-EXPIRATION_DATE=	2023-11-26
+EXPIRATION_DATE=	2023-12-31
 
 LIB_DEPENDS=	libdivecomputer.so:comms/libdc \
 		libzip.so:archivers/libzip \
